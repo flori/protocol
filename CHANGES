@@ -1,0 +1,8 @@
+0.8.2 - 2008-07-20
+  * Some cleanup.
+  * Bumped up dependency on ParseTree to 3.0.
+0.8.1 - 2008-12-17
+  * Fixed ParseTree dependency
+  * Added license file.
+0.8.0 - 2007-11-28
+  * Initial Release

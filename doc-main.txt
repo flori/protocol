@@ -1,0 +1,238 @@
+== Protocol - Method Protocol Specifications in Ruby 
+
+=== Author
+
+Florian Frank mailto:flori@ping.de
+
+=== License
+
+This is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License Version 2 as published by the Free
+Software Foundation: www.gnu.org/copyleft/gpl.html
+
+=== Download
+
+The latest version of <b>protocol</b> can be found at
+
+* http://rubyforge.org/frs/?group_id=4778
+
+The homepage of this library is located at
+
+* http://protocol.rubyforge.org
+
+=== Description
+
+This library offers an implementation of protocols against which you can
+check the conformity of your classes or instances of your classes. They are a
+bit like Java Interfaces, but as mixin modules they can also contain already
+implemented methods. Additionally you can define preconditions/postconditions
+for methods specified in a protocol.
+
+=== Usage
+
+This defines a protocol named +Enumerating+:
+
+ Enumerating = Protocol do
+   # Iterate over each element of this Enumerating class and pass it to the
+   # +block+.
+   def each(&block) end
+
+   include Enumerable
+ end
+
+Every class, that conforms to this protocol, has to implement the understood
+messages (+each+ in this example - with no ordinary arguments and a block
+argument). The following would be an equivalent protocol definition:
+
+ Enumerating = Protocol do
+   # Iterate over each element of this Enumerating class and pass it to the
+   # +block+.
+   understand :each, 0, true
+
+   include Enumerable
+ end
+
+An example of a conforming class is the class +Ary+:
+ class Ary
+   def initialize
+     @ary = [1, 2, 3]
+   end
+ 
+   def each(&block)
+     @ary.each(&block)
+   end
+ 
+   conform_to Enumerating
+ end
+
+The last line (this command being the last line of the class definition is
+important!) of class +Ary+ <tt>conform_to Enumerating</tt> checks the
+conformance of +Ary+ to the +Enumerating+ protocol. If the +each+ method were
+not implemented in +Ary+ a CheckFailed exception would have been thrown,
+containing all the offending CheckError instances.
+
+It also mixes in all the methods that were included in protocol +Enumerating+
+(+Enumerable+'s instance methods). More examples of this can be seen in the
+examples sub directory of the source distribution of this library in file
+examples/enumerating.rb.
+
+==== Template Method Pattern
+
+It's also possible to mix protocol specification and behaviour implementation
+like this:
+
+  Locking = Protocol do
+    specification # not necessary, because Protocol defaults to specification
+                  # mode already
+  
+    def lock() end
+    
+    def unlock() end
+  
+    implementation
+  
+    def synchronize
+      lock
+      begin
+        yield
+      ensure
+        unlock
+      end
+    end
+  end
+
+This specifies a Locking protocol against which several class implementations
+can be checked against for conformance. Here's a FileMutex implementation:
+
+ class FileMutex
+   def initialize
+     @tempfile = Tempfile.new 'file-mutex'
+   end
+
+   def path
+     @tempfile.path
+   end
+
+   def lock
+     puts "Locking '#{path}'."
+     @tempfile.flock File::LOCK_EX
+   end
+
+   def unlock
+     puts "Unlocking '#{path}'."
+     @tempfile.flock File::LOCK_UN
+   end
+
+   conform_to Locking
+ end
+
+The Locking#synchronize method is a template method (see
+http://en.wikipedia.org/wiki/Template_method_pattern), that uses the
+implemtented methods, to make block based locking possbile:
+
+ mutex = FileMutex.new
+ mutex.synchronize do
+   puts "Synchronized with '#{file.path}'."
+ end
+ 
+Now it's easy to swap the implementation to a memory based mutex
+implementation instead:
+
+ class MemoryMutex
+   def initialize
+     @mutex = Mutex.new
+   end
+
+   def lock
+     @mutex.lock
+   end
+
+   def unlock
+     @mutex.unlock
+   end
+
+   conform_to Locking # actually Mutex itself would conform as well ;)
+ end
+
+To check an +object+ for conformity to the Locking protocol call
+Locking.check +object+ and rescue a CheckFailed. Here's an example class
+
+ class MyClass
+   def initialize
+     @mutex = FileMutex.new
+   end
+
+   attr_reader :mutex
+
+   def mutex=(mutex)
+     Locking.check mutex
+     @mutex = mutex
+   end
+ end
+
+This causes a CheckFailed exception to be thrown:
+ obj.mutex = Object.new
+
+This would not raise an exception:
+ obj.mutex = MemoryMutex.new
+
+And neither would this
+
+ obj.mutex = Mutex.new # => #<Mutex:0xb799a4f0 @locked=false, @waiting=[]>
+
+because coincidentally this is true
+
+ Mutex.conform_to? Locking # => true
+
+and thus Locking.check doesn't throw an exception. See the
+examples/locking.rb file for code.
+
+==== Preconditions and Postconditions
+
+You can add additional runtime checks for method arguments and results by
+specifying pre- and postconditions. Here is the classical stack example, that
+shows how:
+
+ StackProtocol = Protocol do
+   def push(x)
+     postcondition { top === x }
+     postcondition { result === myself }
+   end
+ 
+   def top() end
+ 
+   def size() end
+ 
+   def empty?()
+     postcondition { size === 0 ? result : !result }
+   end
+ 
+   def pop()
+     s = size
+     precondition { not empty? }
+     postcondition { size === s - 1 }
+   end
+ end
+
+Defining protocols and checking against conformance doesn't get in the way of
+Ruby's duck typing, but you can still use protocols to define, document, and
+check implementations that you expect from client code.
+
+==== Error modes in Protocols
+
+You can set different error modes for your protocols. By default the mode is
+set to :error, and a failed protocol conformance check raises a CheckError (a
+marker module) exception. Alternatively you can set the error mode to
+:warning with:
+
+ Foo = Protocol do
+   check_failure :warning
+ end
+
+during Protocol definition or later
+
+  Foo.check_failure :warning
+
+In :warning mode no execptions are raised, only a warning is printed to
+STDERR. If you set the error mode via Protocol::ProtocolModule#check_failure
+to :none, nothing will happen on conformance check failures.
