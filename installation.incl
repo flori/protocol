@@ -1,0 +1,16 @@
+<h2>Installation</h2>
+<p>
+The library can be installed via rubygems:
+</p>
+<pre>
+# gem install [=@project_unixname]
+</pre>
+<p>
+The gem and the source archive can also be <a
+href="[=@download_url]">downloaded</a> directly from rubyforge.org.
+</p>
+<p>
+If you want to install this library from the source archive you also need Ryan
+Davis' <a href="http://rubyforge.org/projects/parsetree/">ParseTree</a>
+extension.
+</p>

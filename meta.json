@@ -1,0 +1,11 @@
+{
+  "author_email":"flori@ping.de",
+  "author":"Florian Frank",
+  "documentation_url":"doc\/index.html",
+  "download_url":"http:\/\/rubyforge.org\/frs\/?group_id=4778",
+  "github_url": "http:\/\/github.com\/flori\/protocol\/tree\/master",
+  "homepage_url":"http:\/\/flori.github.com\/protocol",
+  "project_name":"Method Protocols for Ruby Classes",
+  "project_unixname":"protocol",
+  "project_url":"http:\/\/rubyforge.org\/projects\/protocol"
+}
