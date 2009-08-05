@@ -30,6 +30,45 @@ like Java Interfaces, but as mixin modules they can also contain already
 implemented methods. Additionally you can define preconditions/postconditions
 for methods specified in a protocol.
 </p>
+<p>
+Here's a small example of how a Stack protocol might be specified:
+</p>
+<pre>
+StackProtocol = Protocol do
+  def push(x)
+    postcondition { top == x }
+    postcondition { result == myself }
+  end
+ 
+  def top() end
+ 
+  def size() end
+ 
+  def empty?()
+    postcondition { size == 0 ? result : !result }
+  end
+ 
+  def pop()
+    s = size
+    precondition { not empty? }
+    postcondition { size == s - 1 }
+  end
+end
+</pre>
+<p>
+Then conformity to the protocol can be declared and checked like this
+(preconditions and postconditions will be checked during runtime):
+</p>
+<pre>
+class S
+  ...
+  conform_to StackProtocol
+end
+</pre>
+<p>
+More involved examples can be foud in the examples subdirectory of the source
+distribution.
+</p>
 
 <h2>Installation</h2>
 <p>
