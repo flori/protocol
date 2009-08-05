@@ -3,59 +3,21 @@ require 'ruby_parser'
 module Protocol
   # Parse protocol method definition to derive a Message specification.
   class MethodParser
+    class << self
+      attr_accessor :__source_cache__
+    end
+    self.__source_cache__ = {}
+
     # Create a new MethodParser instance for method +methodname+ of module
     # +modul+. For eigenmethods set +eigenclass+ to true, otherwise bad things
     # will happen.
     def initialize(modul, methodname, eigenclass = false)
-      super()
       @method = Module === modul ?
         modul.instance_method(methodname) :
         modul.method(methodname)
-      @complex  = false
-      @arity    = @method.arity
-      if @method.respond_to?(:parameters)
-        parameters = @method.parameters
-        @args, @arg_kinds = parameters.map do |kind, name|
-          case  kind
-          when :req
-            [ name, kind ]
-          when :opt
-            [ name, kind ]
-          when :rest
-            [ :"*#{name}", kind ]
-          when :block
-            [ :"&#{name}", kind ]
-          end
-        end.compact.transpose
-      else
-        raise NotImplementedError,
-          "#{@method.class}#parameters as in ruby version >=1.9.2 is required"
-      end
-      @args         ||= []
-      @arg_kinds    ||= []
-      filename, lineno = @method.source_location
-      if filename
-        source = IO.readlines(filename)
-        source = source[(lineno - 1)..-1].join
-        current = 0
-        tree = nil
-        while current = source.index('end', current)
-          current += 3
-          begin
-            tree = RubyParser.new.parse(source[0, current], filename)
-            break
-          rescue SyntaxError, Racc::ParseError
-          end
-        end
-        ary = tree.to_a.flatten
-        @complex = ary.flatten.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
-        if ary.index(:yield) and @arg_kinds.last != :block
-          @args.push :'&block'
-          @arg_kinds.push :block
-        end
-      end
+      compute_args
+      parse_method
     end
-
     # Returns the names of the arguments of the parsed method.
     attr_reader :args
 
@@ -84,6 +46,66 @@ module Protocol
     # Return true if a block argument was detected.
     def block_arg?
       @arg_kinds.last == :block
+    end
+
+    private
+
+    def compute_args
+      @arity    = @method.arity
+      if @method.respond_to?(:parameters)
+        parameters = @method.parameters
+        @args, @arg_kinds = parameters.map do |kind, name|
+          case  kind
+          when :req
+            [ name, kind ]
+          when :opt
+            [ name, kind ]
+          when :rest
+            [ :"*#{name}", kind ]
+          when :block
+            [ :"&#{name}", kind ]
+          end
+        end.compact.transpose
+      else
+        raise NotImplementedError,
+          "#{@method.class}#parameters as in ruby version >=1.9.2 is required"
+      end
+      @args         ||= []
+      @arg_kinds    ||= []
+    end
+
+    def cached_source(filename)
+      cache = self.class.__source_cache__
+      unless source = cache[filename]
+        source = IO.readlines(filename)
+        cache[filename] = source
+      end
+      source
+    end
+
+    def parse_method
+      @complex  = false
+      filename, lineno = @method.source_location
+      if filename
+        source = cached_source(filename)
+        source = source[(lineno - 1)..-1].join
+        current = 0
+        tree = nil
+        while current = source.index('end', current)
+          current += 3
+          begin
+            tree = RubyParser.new.parse(source[0, current], filename)
+            break
+          rescue SyntaxError, Racc::ParseError
+          end
+        end
+        ary = tree.to_a.flatten
+        @complex = ary.flatten.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
+        if ary.index(:yield) and @arg_kinds.last != :block
+          @args.push :'&block'
+          @arg_kinds.push :block
+        end
+      end
     end
   end
 end
