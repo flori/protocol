@@ -15,3 +15,9 @@ mkdir_p dest
 for file in Dir['lib/protocol/*.rb']
   install(file, dest)
 end
+
+dest = File.join(CONFIG["sitelibdir"], 'protocol', 'method_parser')
+mkdir_p dest
+for file in Dir['lib/protocol/method_parser/*.rb']
+  install(file, dest)
+end
