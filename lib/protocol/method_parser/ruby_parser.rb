@@ -84,8 +84,13 @@ module Protocol
     def cached_source(filename)
       cache = self.class.__source_cache__
       unless source = cache[filename]
-        source = IO.readlines(filename)
-        cache[filename] = source
+        begin
+          source = IO.readlines(filename)
+          cache[filename] = source
+        rescue SystemCallError => e
+          $DEBUG and warn "Caught #{e.class}: #{e}"
+          nil
+        end
       end
       source
     end
@@ -94,7 +99,7 @@ module Protocol
       @complex  = false
       filename, lineno = @method.source_location
       if filename
-        source = cached_source(filename)
+        source = cached_source(filename) or return
         source = source[(lineno - 1)..-1].join
         current = 0
         tree = nil
