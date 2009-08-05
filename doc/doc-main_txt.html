@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: doc-main.txt [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Protocol.html">Protocol</a></li>
+				
+					<li><a href="./Protocol/ArgumentErrorCheckError.html">Protocol::ArgumentErrorCheckError</a></li>
+				
+					<li><a href="./Protocol/BaseCheckError.html">Protocol::BaseCheckError</a></li>
+				
+					<li><a href="./Protocol/BlockCheckError.html">Protocol::BlockCheckError</a></li>
+				
+					<li><a href="./Protocol/CheckError.html">Protocol::CheckError</a></li>
+				
+					<li><a href="./Protocol/CheckFailed.html">Protocol::CheckFailed</a></li>
+				
+					<li><a href="./Protocol/Descriptor.html">Protocol::Descriptor</a></li>
+				
+					<li><a href="./Protocol/Message.html">Protocol::Message</a></li>
+				
+					<li><a href="./Protocol/MethodParser.html">Protocol::MethodParser</a></li>
+				
+					<li><a href="./Protocol/NotImplementedErrorCheckError.html">Protocol::NotImplementedErrorCheckError</a></li>
+				
+					<li><a href="./Protocol/Postcondition.html">Protocol::Postcondition</a></li>
+				
+					<li><a href="./Protocol/PostconditionCheckError.html">Protocol::PostconditionCheckError</a></li>
+				
+					<li><a href="./Protocol/PreconditionCheckError.html">Protocol::PreconditionCheckError</a></li>
+				
+					<li><a href="./Protocol/ProtocolError.html">Protocol::ProtocolError</a></li>
+				
+					<li><a href="./Protocol/ProtocolModule.html">Protocol::ProtocolModule</a></li>
+				
+					<li><a href="./Protocol/SpecificationError.html">Protocol::SpecificationError</a></li>
+				
+					<li><a href="./Protocol/Utilities.html">Protocol::Utilities</a></li>
+				
+					<li><a href="./Class.html">Class</a></li>
+				
+					<li><a href="./Object.html">Object</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h2><a href="Protocol.html">Protocol</a> - Method <a href="Protocol.html">Protocol</a> Specifications in Ruby</h2>
+<h3>Author</h3>
+<p>
+Florian Frank <a href="mailto:flori@ping.de">flori@ping.de</a>
+</p>
+<h3>License</h3>
+<p>
+This is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License Version 2 as published by the Free
+Software Foundation: <a
+href="http://www.gnu.org/copyleft/gpl.html">www.gnu.org/copyleft/gpl.html</a>
+</p>
+<h3>Download</h3>
+<p>
+The latest version of <b>protocol</b> can be found at
+</p>
+<ul>
+<li><a
+href="http://rubyforge.org/frs/?group_id=4778">rubyforge.org/frs/?group_id=4778</a>
+
+</li>
+</ul>
+<p>
+The homepage of this library is located at
+</p>
+<ul>
+<li><a href="http://protocol.rubyforge.org">protocol.rubyforge.org</a>
+
+</li>
+</ul>
+<h3>Description</h3>
+<p>
+This library offers an implementation of protocols against which you can
+check the conformity of your classes or instances of your classes. They are
+a bit like Java Interfaces, but as mixin modules they can also contain
+already implemented methods. Additionally you can define
+preconditions/postconditions for methods specified in a protocol.
+</p>
+<h3>Usage</h3>
+<p>
+This defines a protocol named <tt>Enumerating</tt>:
+</p>
+<pre>
+ Enumerating = Protocol do
+   # Iterate over each element of this Enumerating class and pass it to the
+   # +block+.
+   def each(&amp;block) end
+
+   include Enumerable
+ end
+</pre>
+<p>
+Every class, that conforms to this protocol, has to implement the
+understood messages (<tt>each</tt> in this example - with no ordinary
+arguments and a block argument). The following would be an equivalent
+protocol definition:
+</p>
+<pre>
+ Enumerating = Protocol do
+   # Iterate over each element of this Enumerating class and pass it to the
+   # +block+.
+   understand :each, 0, true
+
+   include Enumerable
+ end
+</pre>
+<p>
+An example of a conforming class is the class <tt>Ary</tt>:
+</p>
+<pre>
+ class Ary
+   def initialize
+     @ary = [1, 2, 3]
+   end
+
+   def each(&amp;block)
+     @ary.each(&amp;block)
+   end
+
+   conform_to Enumerating
+ end
+</pre>
+<p>
+The last line (this command being the last line of the class definition is
+important!) of class <tt>Ary</tt> <tt>conform_to Enumerating</tt> checks
+the conformance of <tt>Ary</tt> to the <tt>Enumerating</tt> protocol. If
+the <tt>each</tt> method were not implemented in <tt>Ary</tt> a CheckFailed
+exception would have been thrown, containing all the offending CheckError
+instances.
+</p>
+<p>
+It also mixes in all the methods that were included in protocol
+<tt>Enumerating</tt> (<tt>Enumerable</tt>&#8217;s instance methods). More
+examples of this can be seen in the examples sub directory of the source
+distribution of this library in file examples/enumerating.rb.
+</p>
+<h4>Template Method Pattern</h4>
+<p>
+It&#8217;s also possible to mix protocol specification and behaviour
+implementation like this:
+</p>
+<pre>
+  Locking = Protocol do
+    specification # not necessary, because Protocol defaults to specification
+                  # mode already
+
+    def lock() end
+
+    def unlock() end
+
+    implementation
+
+    def synchronize
+      lock
+      begin
+        yield
+      ensure
+        unlock
+      end
+    end
+  end
+</pre>
+<p>
+This specifies a Locking protocol against which several class
+implementations can be checked against for conformance. Here&#8217;s a
+FileMutex implementation:
+</p>
+<pre>
+ class FileMutex
+   def initialize
+     @tempfile = Tempfile.new 'file-mutex'
+   end
+
+   def path
+     @tempfile.path
+   end
+
+   def lock
+     puts &quot;Locking '#{path}'.&quot;
+     @tempfile.flock File::LOCK_EX
+   end
+
+   def unlock
+     puts &quot;Unlocking '#{path}'.&quot;
+     @tempfile.flock File::LOCK_UN
+   end
+
+   conform_to Locking
+ end
+</pre>
+<p>
+The Locking#synchronize method is a template method (see <a
+href="http://en.wikipedia.org/wiki/Template_method_pattern">en.wikipedia.org/wiki/Template_method_pattern</a>),
+that uses the implemtented methods, to make block based locking possbile:
+</p>
+<pre>
+ mutex = FileMutex.new
+ mutex.synchronize do
+   puts &quot;Synchronized with '#{file.path}'.&quot;
+ end
+</pre>
+<p>
+Now it&#8217;s easy to swap the implementation to a memory based mutex
+implementation instead:
+</p>
+<pre>
+ class MemoryMutex
+   def initialize
+     @mutex = Mutex.new
+   end
+
+   def lock
+     @mutex.lock
+   end
+
+   def unlock
+     @mutex.unlock
+   end
+
+   conform_to Locking # actually Mutex itself would conform as well ;)
+ end
+</pre>
+<p>
+To check an <tt>object</tt> for conformity to the Locking protocol call
+Locking.check <tt>object</tt> and rescue a CheckFailed. Here&#8217;s an
+example class
+</p>
+<pre>
+ class MyClass
+   def initialize
+     @mutex = FileMutex.new
+   end
+
+   attr_reader :mutex
+
+   def mutex=(mutex)
+     Locking.check mutex
+     @mutex = mutex
+   end
+ end
+</pre>
+<p>
+This causes a CheckFailed exception to be thrown:
+</p>
+<pre>
+ obj.mutex = Object.new
+</pre>
+<p>
+This would not raise an exception:
+</p>
+<pre>
+ obj.mutex = MemoryMutex.new
+</pre>
+<p>
+And neither would this
+</p>
+<pre>
+ obj.mutex = Mutex.new # =&gt; #&lt;Mutex:0xb799a4f0 @locked=false, @waiting=[]&gt;
+</pre>
+<p>
+because coincidentally this is true
+</p>
+<pre>
+ Mutex.conform_to? Locking # =&gt; true
+</pre>
+<p>
+and thus Locking.check doesn&#8217;t throw an exception. See the
+examples/locking.rb file for code.
+</p>
+<h4>Preconditions and Postconditions</h4>
+<p>
+You can add additional runtime checks for method arguments and results by
+specifying pre- and postconditions. Here is the classical stack example,
+that shows how:
+</p>
+<pre>
+ StackProtocol = Protocol do
+   def push(x)
+     postcondition { top === x }
+     postcondition { result === myself }
+   end
+
+   def top() end
+
+   def size() end
+
+   def empty?()
+     postcondition { size === 0 ? result : !result }
+   end
+
+   def pop()
+     s = size
+     precondition { not empty? }
+     postcondition { size === s - 1 }
+   end
+ end
+</pre>
+<p>
+Defining protocols and checking against conformance doesn&#8217;t get in
+the way of Ruby&#8217;s duck typing, but you can still use protocols to
+define, document, and check implementations that you expect from client
+code.
+</p>
+<h4>Error modes in Protocols</h4>
+<p>
+You can set different error modes for your protocols. By default the mode
+is set to :error, and a failed protocol conformance check raises a
+CheckError (a marker module) exception. Alternatively you can set the error
+mode to :warning with:
+</p>
+<pre>
+ Foo = Protocol do
+   check_failure :warning
+ end
+</pre>
+<p>
+during <a href="Protocol.html">Protocol</a> definition or later
+</p>
+<pre>
+  Foo.check_failure :warning
+</pre>
+<p>
+In :warning mode no execptions are raised, only a warning is printed to
+STDERR. If you set the error mode via <a
+href="Protocol/ProtocolModule.html#M000069">Protocol::ProtocolModule#check_failure</a>
+to :none, nothing will happen on conformance check failures.
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+

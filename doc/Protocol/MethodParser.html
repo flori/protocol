@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Protocol::MethodParser</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/protocol/method_parser/ruby_parser_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/protocol/method_parser/ruby_parser.rb">lib/protocol/method_parser/ruby_parser.rb</a></li>
+					
+						<li><a href="../lib/protocol/method_parser/parse_tree_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/protocol/method_parser/parse_tree.rb">lib/protocol/method_parser/parse_tree.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">SexpProcessor</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000000">::new</a></li>
+					
+					<li><a href="#M000001">::new</a></li>
+					
+					<li><a href="#M000004">#arg</a></li>
+					
+					<li><a href="#M000003">#arg</a></li>
+					
+					<li><a href="#M000006">#arg_kind</a></li>
+					
+					<li><a href="#M000005">#arg_kind</a></li>
+					
+					<li><a href="#M000010">#block_arg?</a></li>
+					
+					<li><a href="#M000008">#block_arg?</a></li>
+					
+					<li><a href="#M000007">#complex?</a></li>
+					
+					<li><a href="#M000009">#complex?</a></li>
+					
+					<li><a href="#M000002">#process</a></li>
+					
+					<li><a href="#M000012">#process_args</a></li>
+					
+					<li><a href="#M000015">#process_block</a></li>
+					
+					<li><a href="#M000013">#process_block_arg</a></li>
+					
+					<li><a href="#M000011">#process_defn</a></li>
+					
+					<li><a href="#M000014">#process_yield</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Protocol.html">Protocol</a></li>
+				
+					<li><a href="../Protocol/ArgumentErrorCheckError.html">Protocol::ArgumentErrorCheckError</a></li>
+				
+					<li><a href="../Protocol/BaseCheckError.html">Protocol::BaseCheckError</a></li>
+				
+					<li><a href="../Protocol/BlockCheckError.html">Protocol::BlockCheckError</a></li>
+				
+					<li><a href="../Protocol/CheckError.html">Protocol::CheckError</a></li>
+				
+					<li><a href="../Protocol/CheckFailed.html">Protocol::CheckFailed</a></li>
+				
+					<li><a href="../Protocol/Descriptor.html">Protocol::Descriptor</a></li>
+				
+					<li><a href="../Protocol/Message.html">Protocol::Message</a></li>
+				
+					<li><a href="../Protocol/MethodParser.html">Protocol::MethodParser</a></li>
+				
+					<li><a href="../Protocol/NotImplementedErrorCheckError.html">Protocol::NotImplementedErrorCheckError</a></li>
+				
+					<li><a href="../Protocol/Postcondition.html">Protocol::Postcondition</a></li>
+				
+					<li><a href="../Protocol/PostconditionCheckError.html">Protocol::PostconditionCheckError</a></li>
+				
+					<li><a href="../Protocol/PreconditionCheckError.html">Protocol::PreconditionCheckError</a></li>
+				
+					<li><a href="../Protocol/ProtocolError.html">Protocol::ProtocolError</a></li>
+				
+					<li><a href="../Protocol/ProtocolModule.html">Protocol::ProtocolModule</a></li>
+				
+					<li><a href="../Protocol/SpecificationError.html">Protocol::SpecificationError</a></li>
+				
+					<li><a href="../Protocol/Utilities.html">Protocol::Utilities</a></li>
+				
+					<li><a href="../Class.html">Class</a></li>
+				
+					<li><a href="../Object.html">Object</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Protocol::MethodParser</h1>
+
+		<div id="description">
+			<p>
+Parse protocol method definition to derive a <a
+href="Message.html">Message</a> specification.
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="args-attribute-method" class="method-detail">
+				<a name="args"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">args</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the names of the arguments of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="args-attribute-method" class="method-detail">
+				<a name="args"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">args</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the names of the arguments of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="arg-kinds-attribute-method" class="method-detail">
+				<a name="arg_kinds"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">arg_kinds</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the kinds of the arguments of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="arg-kinds-attribute-method" class="method-detail">
+				<a name="arg_kinds"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">arg_kinds</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the names of the arguments of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="arity-attribute-method" class="method-detail">
+				<a name="arity"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">arity</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the arity of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="arity-attribute-method" class="method-detail">
+				<a name="arity"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">arity</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+Returns the arity of the parsed method.
+</p>
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="M000000"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(modul, methodname, eigenclass = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Create a new <a href="MethodParser.html">MethodParser</a> instance for
+method <tt>methodname</tt> of module <tt>modul</tt>. For eigenmethods set
+<tt>eigenclass</tt> to true, otherwise bad things will happen.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/ruby_parser.rb, line 9</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">eigenclass</span> = <span class="ruby-keyword kw">false</span>)
+      <span class="ruby-keyword kw">super</span>()
+      <span class="ruby-ivar">@method</span> = <span class="ruby-constant">Module</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">modul</span> <span class="ruby-value">?
+</span>        <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">instance_method</span>(<span class="ruby-identifier">methodname</span>) <span class="ruby-operator">:</span>
+        <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">method</span>(<span class="ruby-identifier">methodname</span>)
+      <span class="ruby-ivar">@complex</span>  = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-ivar">@arity</span>    = <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">arity</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:parameters</span>)
+        <span class="ruby-identifier">parameters</span> = <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">parameters</span>
+        <span class="ruby-ivar">@args</span>, <span class="ruby-ivar">@arg_kinds</span> = <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">kind</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">case</span>  <span class="ruby-identifier">kind</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:req</span>
+            [ <span class="ruby-identifier">name</span>, <span class="ruby-identifier">kind</span> ]
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:opt</span>
+            [ <span class="ruby-identifier">name</span>, <span class="ruby-identifier">kind</span> ]
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:rest</span>
+            [ <span class="ruby-identifier">:&quot;*#{name}&quot;</span>, <span class="ruby-identifier">kind</span> ]
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:block</span>
+            [ <span class="ruby-identifier">:&quot;&amp;#{name}&quot;</span>, <span class="ruby-identifier">kind</span> ]
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">transpose</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>,
+          <span class="ruby-node">&quot;#{@method.class}#parameters as in ruby version &gt;=1.9.2 is required&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@args</span>         <span class="ruby-operator">||=</span> []
+      <span class="ruby-ivar">@arg_kinds</span>    <span class="ruby-operator">||=</span> []
+      <span class="ruby-identifier">filename</span>, <span class="ruby-identifier">lineno</span> = <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">source_location</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">filename</span>
+        <span class="ruby-identifier">source</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">filename</span>)
+        <span class="ruby-identifier">source</span> = <span class="ruby-identifier">source</span>[(<span class="ruby-identifier">lineno</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">current</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">tree</span> = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">current</span> = <span class="ruby-identifier">source</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'end'</span>, <span class="ruby-identifier">current</span>)
+          <span class="ruby-identifier">current</span> <span class="ruby-operator">+=</span> <span class="ruby-value">3</span>
+          <span class="ruby-keyword kw">begin</span>
+            <span class="ruby-identifier">tree</span> = <span class="ruby-constant">RubyParser</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">source</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">current</span>], <span class="ruby-identifier">filename</span>)
+            <span class="ruby-keyword kw">break</span>
+          <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SyntaxError</span>, <span class="ruby-constant">Racc</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">flatten</span>
+        <span class="ruby-ivar">@complex</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">:call</span>, <span class="ruby-identifier">:fcall</span>, <span class="ruby-identifier">:vcall</span> ].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">node</span>) }
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">:yield</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:block</span>
+          <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:'&amp;block'</span>
+          <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:block</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="M000001"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(modul, methodname, eigenclass = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Create a new <a href="MethodParser.html">MethodParser</a> instance for
+method <tt>methodname</tt> of module <tt>modul</tt>. For eigenmethods set
+<tt>eigenclass</tt> to true, otherwise bad things will happen.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 10</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">eigenclass</span> = <span class="ruby-keyword kw">false</span>)
+      <span class="ruby-keyword kw">super</span>()
+      <span class="ruby-ivar">@method</span> = <span class="ruby-constant">Module</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">modul</span> <span class="ruby-value">?
+</span>        <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">instance_method</span>(<span class="ruby-identifier">methodname</span>) <span class="ruby-operator">:</span>
+        <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">method</span>(<span class="ruby-identifier">methodname</span>)
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strict</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">auto_shift_type</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-ivar">@complex</span>      = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-ivar">@first_defn</span>   = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-ivar">@first_block</span>  = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-ivar">@args</span>         = []
+      <span class="ruby-ivar">@arg_kinds</span>    = []
+      <span class="ruby-ivar">@arity</span>        = <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">arity</span>
+      <span class="ruby-identifier">parsed</span> = <span class="ruby-constant">ParseTree</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">parse_tree_for_method</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">eigenclass</span>)
+      <span class="ruby-identifier">process</span> <span class="ruby-identifier">parsed</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="arg-method" class="method-detail ">
+				<a name="M000004"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">arg</span><span
+						class="method-args">(i)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns the i-th argument (beginning with 0).
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="arg-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/ruby_parser.rb, line 63</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">arg</span>(<span class="ruby-identifier">i</span>)
+      <span class="ruby-ivar">@args</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="arg-method" class="method-detail ">
+				<a name="M000003"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">arg</span><span
+						class="method-args">(i)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="arg-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 36</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">arg</span>(<span class="ruby-identifier">i</span>)
+      <span class="ruby-ivar">@args</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="arg-kind-method" class="method-detail ">
+				<a name="M000006"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">arg_kind</span><span
+						class="method-args">(i)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="arg-kind-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">arg_kind</span>(<span class="ruby-identifier">i</span>)
+      <span class="ruby-ivar">@arg_kinds</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="arg-kind-method" class="method-detail ">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">arg_kind</span><span
+						class="method-args">(i)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns the i-th kind of an argument (beginning with 0).
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="arg-kind-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/ruby_parser.rb, line 71</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">arg_kind</span>(<span class="ruby-identifier">i</span>)
+      <span class="ruby-ivar">@arg_kinds</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="block-arg--method" class="method-detail ">
+				<a name="M000010"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">block_arg?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true if a block argument was detected.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="block-arg--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/ruby_parser.rb, line 85</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">block_arg?</span>
+      <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:block</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="block-arg--method" class="method-detail ">
+				<a name="M000008"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">block_arg?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true if a block argument was detected.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="block-arg--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 57</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">block_arg?</span>
+      <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:block</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="complex--method" class="method-detail ">
+				<a name="M000007"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">complex?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true if this protocol method is a complex method, which ought to be
+called for checking conformance to the protocol.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="complex--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 52</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complex?</span>
+      <span class="ruby-ivar">@complex</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="complex--method" class="method-detail ">
+				<a name="M000009"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">complex?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true if this protocol method is a complex method, which ought to be
+called for checking conformance to the protocol.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="complex--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/ruby_parser.rb, line 80</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complex?</span>
+      <span class="ruby-ivar">@complex</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-method" class="method-detail ">
+				<a name="M000002"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Process <tt>exp</tt>, but catch UnsupportedNodeError exceptions and ignore
+them.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 28</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-keyword kw">super</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">UnsupportedNodeError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ignore</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-args-method" class="method-detail ">
+				<a name="M000012"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process_args</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remember the argument names in <tt>exp</tt> in the args attribute.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-args-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 73</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_args</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">replace</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Symbol</span> }
+      <span class="ruby-ivar">@arg_kinds</span> = <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">?*</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">:rest</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:req</span> }
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:block</span> }
+        <span class="ruby-identifier">lasgns</span> = <span class="ruby-identifier">block</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">transpose</span>[<span class="ruby-value">1</span>]
+        <span class="ruby-identifier">i</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+        <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">reverse_each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">first</span>
+          <span class="ruby-identifier">l</span> = <span class="ruby-identifier">lasgns</span>.<span class="ruby-identifier">last</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">l</span>
+            <span class="ruby-ivar">@arg_kinds</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">:opt</span>
+            <span class="ruby-identifier">lasgns</span>.<span class="ruby-identifier">pop</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">i</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-identifier">:dummy</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-block-method" class="method-detail ">
+				<a name="M000015"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process_block</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+We only consider the first block in <tt>exp</tt> (can there be more than
+one?), and then try to figure out, if this is a complex method or not.
+Continue processing the <tt>exp</tt> tree after that.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-block-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 114</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_block</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@first_block</span>
+        <span class="ruby-ivar">@first_block</span> = <span class="ruby-keyword kw">false</span>
+        <span class="ruby-ivar">@complex</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">:call</span>, <span class="ruby-identifier">:fcall</span>, <span class="ruby-identifier">:vcall</span> ].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">e</span>) }
+        <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">process</span> <span class="ruby-identifier">e</span> }
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-identifier">:dummy</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-block-arg-method" class="method-detail ">
+				<a name="M000013"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process_block_arg</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remember if we encounter a block argument.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-block-arg-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 94</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_block_arg</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:&quot;&amp;#{exp.first}&quot;</span>
+      <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:block</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-identifier">:dummy</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-defn-method" class="method-detail ">
+				<a name="M000011"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process_defn</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Only consider first the first defn, skip inner method definitions.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-defn-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 62</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_defn</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@first_defn</span>
+        <span class="ruby-ivar">@first_defn</span> = <span class="ruby-keyword kw">false</span>
+        <span class="ruby-identifier">_name</span>, <span class="ruby-identifier">scope</span> = <span class="ruby-identifier">exp</span>
+        <span class="ruby-identifier">process</span> <span class="ruby-identifier">scope</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-identifier">:dummy</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="process-yield-method" class="method-detail ">
+				<a name="M000014"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">process_yield</span><span
+						class="method-args">(exp)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remember if we encounter a yield keyword.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="process-yield-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol/method_parser/parse_tree.rb, line 102</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_yield</span>(<span class="ruby-identifier">exp</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:block</span>
+        <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:'&amp;block'</span>
+        <span class="ruby-ivar">@arg_kinds</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">:block</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-identifier">:dummy</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
