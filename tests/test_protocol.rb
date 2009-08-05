@@ -19,25 +19,25 @@ class TestProtocol < Test::Unit::TestCase
   end
 
   TestProtocol_foo_bar_1 = Protocol do
-    include TestProtocol_foo
+    include TestProtocol::TestProtocol_foo
     understand :bar
   end
 
   TestProtocol_foo_bar_1_fail = Protocol do
-    include TestProtocol_foo
+    include TestProtocol::TestProtocol_foo
     understand :bar
   end
 
   TestProtocol_foo_bar_2 = Protocol do
-    include TestProtocol_foo
-    include TestProtocol_bar
+    include TestProtocol::TestProtocol_foo
+    include TestProtocol::TestProtocol_bar
   end
 
   TestProtocol_foo_bar_2_fail = Protocol do
     check_failure :error
 
-    include TestProtocol_foo
-    include TestProtocol_bar
+    include TestProtocol::TestProtocol_foo
+    include TestProtocol::TestProtocol_bar
   end
 
   TestProtocolArgs = Protocol do
@@ -47,7 +47,7 @@ class TestProtocol < Test::Unit::TestCase
   end
 
   TestProtocolArgsOverwritten = Protocol do
-    include TestProtocolArgs
+    include TestProtocol::TestProtocolArgs
 
     def bar(a, b, c)
     end
@@ -101,8 +101,8 @@ class TestProtocol < Test::Unit::TestCase
 
   TestProtocolWrapMethod = Protocol do
     def foo_bar(foo, bar)
-      TestProtocolWrapMethodPassedFoo =~ foo
-      TestProtocolWrapMethodPassedBar =~ bar
+      ::TestProtocol::TestProtocolWrapMethodPassedFoo =~ foo
+      ::TestProtocol::TestProtocolWrapMethodPassedBar =~ bar
     end
   end
 
@@ -128,7 +128,7 @@ class TestProtocol < Test::Unit::TestCase
   end
 
   TestProtocolInheritance = Protocol do
-    inherit MyClass, :one_with_block
+    inherit TestProtocol::MyClass, :one_with_block
   end
 
   TestProtocolInheritanceC = Protocol do
@@ -617,4 +617,3 @@ class TestProtocol < Test::Unit::TestCase
     end
   end
 end
-  # vim: set et sw=2 ts=2:

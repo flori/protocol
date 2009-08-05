@@ -100,55 +100,58 @@ class Q
   conform_to QueueProtocol
 end
 
-if $0 == __FILE__
-  q = Q.new
-  q.observer = O.new
-  q.empty? # => true
-  begin
-    q.deq
-  rescue Protocol::CheckError => e
-    e # => #<Protocol::PreconditionCheckError: QueueProtocol#deq(0): precondition failed for Q>
-  end
-  q.empty? # => true
-  q.size   # => 0
-  q.first  # => nil
-  q.enq 2
-  q.empty? # => false
-  q.size   # => 1
-  q.first  # => 2
-  q.enq 2
-  q.size   # => 2
-  q.deq    # => 2
-  q.first  # => 2
-  q.size   # => 1
-
-  q = Q.new
-  q.observer = O.new
-  q.empty? # => true
-  begin
-    q.deq
-  rescue Protocol::CheckError => e
-    e # => #<Protocol::PreconditionCheckError: QueueProtocol#deq(0): precondition failed for Q>
-  end
-  q.empty? # => true
-  q.size   # => 0
-  q.first  # => nil
-  q.enq 2
-  q.empty? # => false
-  q.size   # => 1
-  q.first  # => 2
-  q.enq 2
-  q.size   # => 2
-  q.deq    # => 2
-  q.first  # => 2
-  q.size   # => 1
-  q.observer = SneakyO.new
-  q.deq    # => 2
-  q.empty? # => true
-  begin
-    q.enq 7
-  rescue Protocol::CheckError => e
-    e # => #<Protocol::PostconditionCheckError: ObserverProtocol#after_enq(1): postcondition failed for SneakyO, result = 7>
-  end
+def should_be(a1, a2)
+  puts "#{a1.inspect} (#{a2.inspect})"
 end
-# >> "Enqueued.\nEnqueued.\nDequeued.\nEnqueued.\nEnqueued.\nDequeued.\nDequeued.\nEnqueued.\nDequeued.\n"
+
+q = Q.new
+q.observer = O.new
+should_be q.empty?, true
+begin
+  q.deq
+rescue Protocol::CheckError => e
+  p e
+end
+should_be q.empty?, true
+should_be q.size, 0
+should_be q.first, nil
+q.enq 2
+should_be q.empty?, false
+should_be q.size, 1
+should_be q.first, 2
+q.enq 2
+should_be q.size, 2
+should_be q.deq, 2
+should_be q.first, 2
+should_be q.size, 1
+
+q = Q.new
+q.observer = O.new
+should_be q.empty?, true
+begin
+  q.deq
+  puts "Should have thrown Protocol::CheckFailed!"
+rescue Protocol::CheckError => e
+  p e
+end
+should_be q.empty?, true
+should_be q.size, 0
+should_be q.first, nil
+q.enq 2
+should_be q.empty?, false
+should_be q.size, 1
+should_be q.first, 2
+q.enq 2
+should_be q.size, 2
+should_be q.deq, 2
+should_be q.first, 2
+should_be q.size, 1
+q.observer = SneakyO.new
+should_be q.deq, 2
+should_be q.empty?, true
+begin
+  q.enq 7
+  puts "Should have thrown Protocol::CheckFailed!"
+rescue Protocol::CheckError => e
+  p e
+end

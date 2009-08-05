@@ -53,23 +53,23 @@ end
 
 if $0 == __FILE__
   s = S.new
-  s.top # => nil
-  s.empty? # => true
-  s.size # => 0
+  puts s.top.inspect + " (nil)"
+  puts s.empty?.to_s + " (true)"
+  puts s.size.to_s   + " (0)"
   begin
     s.pop
   rescue Protocol::CheckError => e
-    e # => #<Protocol::PreconditionCheckError: StackProtocol#empty?(0): precondition failed for S>
+    p e # => #<Protocol::PreconditionCheckError: StackProtocol#empty?(0): precondition failed for S>
   end
-  s.empty? # => true
+  puts s.empty?.to_s  + " (true)"
   s.push 2
-  s.empty? # => false
-  s.size # => 1
-  s.top # => 2
+  puts s.empty?.to_s  + " (false)"
+  puts s.size.to_s    + " (1)"
+  puts s.top.to_s     + " (2)"
   s.push 4
-  s.top # => 4
-  s.size # => 2
-  s.pop # => 4
-  s.top # => 2
-  s.size # => 1
+  puts s.top.to_s     + " (4)"
+  puts s.size.to_s    + " (2)"
+  puts s.pop.to_s     + " (4)"
+  puts s.top.to_s     + " (2)"
+  puts s.size.to_s    + " (1)"
 end

@@ -1,8 +1,12 @@
 require 'protocol/version'
-require 'parse_tree'
-require 'sexp_processor'
 
 module Protocol
+  if RUBY_VERSION[/\A1\.8\./]
+    require 'protocol/method_parser/parse_tree'
+  else
+    require 'protocol/method_parser/ruby_parser'
+  end
+
   class ::Object
     # Returns true if this object conforms to +protocol+, otherwise false.
     #
@@ -144,7 +148,7 @@ module Protocol
   # after the result of the wrapped method was determined.
   class Postcondition
     instance_methods.each do |m|
-      m =~ /\A(__|instance_eval\Z|inspect\Z)/ or undef_method m
+      m.to_s =~ /\A(__|object_id|instance_eval\Z|inspect\Z)/ or undef_method m
     end
 
     def initialize(object)
@@ -204,8 +208,9 @@ module Protocol
     # Creates a Message instance named +name+, with the arity +arity+.
     # If +arity+ is nil, the arity isn't checked during conformity tests.
     def initialize(protocol, name, arity = nil, block_expected = false)
+      name = name.to_s
       @protocol, @name, @arity, @block_expected =
-        protocol, name.to_s, arity, !!block_expected
+        protocol, name, arity, !!block_expected
     end
 
     # The protocol this message was defined in.
@@ -320,7 +325,7 @@ module Protocol
               (1..arity).map { |i| "x#{i}," }
             else
               (1..~arity).map { |i| "x#{i}," } << '*rest,'
-            end
+            end.join
           wrapped_call = %{
             alias_method :'#{inner_name}', :'#{name}'
 
@@ -395,7 +400,7 @@ module Protocol
             " in method '#{name}' (#{check_arity} for #{arity}) of #{object}")
       end
       if block_expected?
-        if object.singleton_methods(false).include?(name)
+        if object.singleton_methods(false).map { |m| m.to_s } .include?(name)
           parser = MethodParser.new(object, name, true)
         else
           ancestors = object.class.ancestors
@@ -446,90 +451,6 @@ module Protocol
     end
   end
 
-  # Parse protocol method definition to derive a Message specification.
-  class MethodParser < SexpProcessor
-    # Create a new MethodParser instance for method +methodname+ of module
-    # +modul+. For eigenmethods set +eigenclass+ to true, otherwise bad things
-    # will happen.
-    def initialize(modul, methodname, eigenclass = false)
-      super()
-      self.strict = false
-      self.auto_shift_type = true
-      @complex      = false
-      @block_arg    = false
-      @first_defn   = true
-      @first_block  = true
-      @args         = []
-      parsed = ParseTree.new.parse_tree_for_method(modul, methodname, eigenclass)
-      process parsed
-    end
-
-    # Process +exp+, but catch UnsupportedNodeError exceptions and ignore them.
-    def process(exp)
-      super
-    rescue UnsupportedNodeError => ignore
-    end
-
-    # Returns the names of the arguments of the parsed method.
-    attr_reader :args
-
-    # Returns the arity of the parsed method.
-    def arity
-      @args.size
-    end
-
-    # Return true if this protocol method is a complex method, which ought to
-    # be called for checking conformance to the protocol.
-    def complex?
-      @complex
-    end
-
-    # Return true if a block argument was detected.
-    def block_arg?
-      @block_arg
-    end
-
-    # Only consider first the first defn, skip inner method definitions.
-    def process_defn(exp)
-      if @first_defn
-        @first_defn = false
-        _name, scope = exp
-        process scope
-      end
-      exp.clear
-      s :dummy
-    end
-
-    # Remember the argument names in +exp+ in the args attribute.
-    def process_args(exp)
-      @args.replace exp
-      exp.clear
-      s :dummy
-    end
-
-    # Remember if we encounter a block argument or a yield keyword.
-    def process_block_arg(exp)
-      @block_arg = true
-      exp.clear
-      s :dummy
-    end
-
-    alias process_yield process_block_arg
-
-    # We only consider the first block in +exp+ (can there be more than one?),
-    # and then try to figure out, if this is a complex method or not. Continue
-    # processing the +exp+ tree after that.
-    def process_block(exp)
-      if @first_block
-        @first_block = false
-        @complex = exp[-1][0] != :nil rescue false
-        exp.each { |e| process e }
-      end
-      exp.clear
-      s :dummy
-    end
-  end
-
   # A ProtocolModule object 
   class ProtocolModule < Module
     # Creates an new ProtocolModule instance.
@@ -546,7 +467,7 @@ module Protocol
     def descriptors
       descriptors = []
       protocols.each do |a|
-        descriptors << a.instance_variable_get('@descriptor')
+        descriptors << a.instance_variable_get(:@descriptor)
       end
       descriptors
     end
@@ -578,8 +499,7 @@ module Protocol
     # have to call #reset_messages, if you want to recompute the array in the
     # next call to #messages.
     def messages
-      @messages and return @messages
-      @messages = []
+      result = []
       seen = {}
       descriptors.each do |d|
         dm = d.messages
@@ -588,10 +508,9 @@ module Protocol
           seen[m.name] = true
           delete
         end
-        @messages.concat dm
+        result.concat dm
       end
-      @messages.sort!
-      @messages
+      result.sort!
     end
 
     alias to_a messages
@@ -820,8 +739,14 @@ module Protocol
     # This Method tries to find the first module that implements the method
     # named +methodname+ in the array of +ancestors+. If this fails nil is
     # returned.
-    def find_method_module(methodname, ancestors) ancestors.each do |a|
-        return a if a.instance_methods(false).include? methodname
+    def find_method_module(methodname, ancestors)
+      methodname = methodname.to_s
+      ancestors.each do |a|
+        begin
+          a.instance_method(methodname)
+          return a
+        rescue NameError
+        end
       end
       nil
     end

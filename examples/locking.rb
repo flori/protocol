@@ -53,7 +53,7 @@ if $0 == __FILE__
   #  Locking '...'.
   #  Synchronized with '...'..
   #  Unlocking '...'.
-  mutex = FileMutex.new
+  p mutex = FileMutex.new
   mutex.synchronize do
     puts "Synchronized with '#{mutex.path}'."
   end
@@ -74,13 +74,13 @@ if $0 == __FILE__
     conform_to Locking # actually Mutex itself would conform as well ;)
   end
 
-  mutex = MemoryMutex.new
+  p mutex = MemoryMutex.new
   mutex.synchronize do
     puts "Synchronized in memory."
   end
 
-  MemoryMutex.conform_to? Locking     # => true
-  MemoryMutex.new.conform_to? Locking # => true
+  puts MemoryMutex.conform_to?(Locking).to_s     + ' (true)'
+  puts MemoryMutex.new.conform_to?(Locking).to_s + ' (true)'
 
   class MyClass
     def initialize
@@ -90,22 +90,22 @@ if $0 == __FILE__
     attr_reader :mutex
 
     def mutex=(mutex)
-      Locking.check mutex
+      Locking =~ mutex
       @mutex = mutex
     end
   end
 
   obj = MyClass.new
-  obj.mutex # => #<FileMutex:0xb788f9ac @tempfile=#<File:/tmp/file-mutex.26553.2>>
+  p obj.mutex # => #<FileMutex:0xb788f9ac @tempfile=#<File:/tmp/file-mutex.26553.2>>
   begin
     obj.mutex = Object.new
+    puts "Should have thrown Protocol::CheckFailed!"
   rescue Protocol::CheckFailed => e
-    e # => #<Protocol::CheckFailed: #<Protocol::NotImplementedErrorCheckError: Locking#lock(0): method 'lock' not responding in #<Object:0xb788f59c>>|#<Protocol::NotImplementedErrorCheckError: Locking#unlock(0): method 'unlock' not responding in #<Object:0xb788f59c>>
+    p e
   end
-  obj.mutex = MemoryMutex.new # => #<MemoryMutex:0xb788f038 @mutex=#<Mutex:0xb788eea8>>
+  p obj.mutex = MemoryMutex.new # => #<MemoryMutex:0xb788f038 @mutex=#<Mutex:0xb788eea8>>
   # This works as well:
-  obj.mutex = Mutex.new       # => #<Mutex:0xb788ecc8>
-  Locking.check Mutex         # => true
-  Mutex.conform_to? Locking   # => true
+  obj.mutex = Mutex.new
+  puts Locking.check(Mutex).to_s        + ' (true)'
+  puts Mutex.conform_to?(Locking).to_s  + ' (true)'
 end
-# >> "Locking '/tmp/file-mutex.26553.1'.\nSynchronized with '/tmp/file-mutex.26553.1'.\nUnlocking '/tmp/file-mutex.26553.1'.\nSynchronized in memory.\n"

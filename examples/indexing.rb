@@ -21,7 +21,8 @@ if $0 == __FILE__
     class Proc
       conform_to Indexing
     end
+  puts "Should have thrown Protocol::CheckFailed!"
   rescue Protocol::CheckFailed => e
-    e.to_s # => "Indexing#[]=(): method '[]=' not implemented in Proc"
+    p e
   end
 end

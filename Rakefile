@@ -1,5 +1,3 @@
-# vim: set et sw=2 ts=2:
-
 begin
   require 'rake/gempackagetask'
 rescue LoadError
@@ -51,6 +49,7 @@ EOT
 
     s.require_path = 'lib'
     s.add_dependency 'ParseTree', '~> 3.0'
+    s.add_dependency 'ruby_parser', '~> 2.0'
 
     s.has_rdoc = true
     s.rdoc_options << '--main' << 'doc-main.txt'

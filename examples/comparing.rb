@@ -18,9 +18,9 @@ goliath = Person.new 'Goliath', 2_60
 david = Person.new 'David', 1_40
 symbol = Person.new 'The artist formerly known as Prince', 1_40
 
-david < goliath   # => true
-david >= goliath  # => false
-david == symbol   # => true
+puts "david < goliath   = #{david < goliath} (true)"
+puts "david >= goliath  = #{david >= goliath} (false)"
+puts "david == symbol   = #{david == symbol} (true)"
 
 begin
   class NoPerson
@@ -32,6 +32,7 @@ begin
 
     conform_to Comparing
   end
+  puts "Should have thrown Protocol::CheckFailed!"
 rescue Protocol::CheckFailed => e
-  e.to_s # => "Comparing#<=>(1): method '<=>' not implemented in NoPerson"
+  p e
 end
