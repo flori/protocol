@@ -5,6 +5,12 @@ module Protocol
   class MethodParser
     class << self
       attr_accessor :__source_cache__
+
+      # Flushes the source cache.
+      def flush_source_cache
+        __source_cache__.clear
+        self
+      end
     end
     self.__source_cache__ = {}
 
@@ -18,6 +24,7 @@ module Protocol
       compute_args
       parse_method
     end
+
     # Returns the names of the arguments of the parsed method.
     attr_reader :args
 
