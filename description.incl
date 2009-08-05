@@ -36,8 +36,15 @@ Then conformity to the protocol can be declared and checked like this
 (preconditions and postconditions will be checked during runtime):
 </p>
 <pre>
-class S
-  ...
+class Stack < Array
+  def push(x)
+    super x
+  end
+
+  def top()
+    last
+  end
+
   conform_to StackProtocol
 end
 </pre>
