@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Protocol::ProtocolModule</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/protocol_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/protocol.rb">lib/protocol.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Module</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000035">::new</a></li>
+					
+					<li><a href="#M000050">#=~</a></li>
+					
+					<li><a href="#M000043">#[]</a></li>
+					
+					<li><a href="#M000049">#check</a></li>
+					
+					<li><a href="#M000053">#check_failure</a></li>
+					
+					<li><a href="#M000051">#check_failures</a></li>
+					
+					<li><a href="#M000036">#descriptors</a></li>
+					
+					<li><a href="#M000046">#each</a></li>
+					
+					<li><a href="#M000045">#each_message</a></li>
+					
+					<li><a href="#M000044">#grep</a></li>
+					
+					<li><a href="#M000057">#implementation</a></li>
+					
+					<li><a href="#M000058">#implementation?</a></li>
+					
+					<li><a href="#M000052">#included</a></li>
+					
+					<li><a href="#M000056">#inherit</a></li>
+					
+					<li><a href="#M000048">#inspect</a></li>
+					
+					<li><a href="#M000039">#messages</a></li>
+					
+					<li><a href="#M000061">#method_added</a></li>
+					
+					<li><a href="#M000055">#parse_instance_method_signature</a></li>
+					
+					<li><a href="#M000037">#protocols</a></li>
+					
+					<li><a href="#M000041">#reset_messages</a></li>
+					
+					<li><a href="#M000059">#specification</a></li>
+					
+					<li><a href="#M000060">#specification?</a></li>
+					
+					<li><a href="#M000040">#to_a</a></li>
+					
+					<li><a href="#M000038">#to_ruby</a></li>
+					
+					<li><a href="#M000047">#to_s</a></li>
+					
+					<li><a href="#M000054">#understand</a></li>
+					
+					<li><a href="#M000042">#understand?</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+			<div id="includes-section" class="section">
+				<h3 class="section-header">Included Modules</h3>
+				<ul class="link-list">
+				
+				
+					<li><span class="include">Enumerable</span></li>
+				
+				
+				</ul>
+			</div>
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Protocol.html">Protocol</a></li>
+				
+					<li><a href="../Protocol/ArgumentErrorCheckError.html">Protocol::ArgumentErrorCheckError</a></li>
+				
+					<li><a href="../Protocol/BaseCheckError.html">Protocol::BaseCheckError</a></li>
+				
+					<li><a href="../Protocol/BlockCheckError.html">Protocol::BlockCheckError</a></li>
+				
+					<li><a href="../Protocol/CheckError.html">Protocol::CheckError</a></li>
+				
+					<li><a href="../Protocol/CheckFailed.html">Protocol::CheckFailed</a></li>
+				
+					<li><a href="../Protocol/Descriptor.html">Protocol::Descriptor</a></li>
+				
+					<li><a href="../Protocol/Message.html">Protocol::Message</a></li>
+				
+					<li><a href="../Protocol/NotImplementedErrorCheckError.html">Protocol::NotImplementedErrorCheckError</a></li>
+				
+					<li><a href="../Protocol/Postcondition.html">Protocol::Postcondition</a></li>
+				
+					<li><a href="../Protocol/PostconditionCheckError.html">Protocol::PostconditionCheckError</a></li>
+				
+					<li><a href="../Protocol/PreconditionCheckError.html">Protocol::PreconditionCheckError</a></li>
+				
+					<li><a href="../Protocol/ProtocolError.html">Protocol::ProtocolError</a></li>
+				
+					<li><a href="../Protocol/ProtocolModule.html">Protocol::ProtocolModule</a></li>
+				
+					<li><a href="../Protocol/SpecificationError.html">Protocol::SpecificationError</a></li>
+				
+					<li><a href="../Protocol/Utilities.html">Protocol::Utilities</a></li>
+				
+					<li><a href="../Class.html">Class</a></li>
+				
+					<li><a href="../Object.html">Object</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Protocol::ProtocolModule</h1>
+
+		<div id="description">
+			<p>
+A <a href="ProtocolModule.html">ProtocolModule</a> object
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="mode-attribute-method" class="method-detail">
+				<a name="mode"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">mode</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+The current check mode :none, :warning, or :error (the default).
+</p>
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="M000035"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(&block)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Creates an new <a href="ProtocolModule.html">ProtocolModule</a> instance.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 457</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-ivar">@descriptor</span> = <span class="ruby-constant">Descriptor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+      <span class="ruby-ivar">@mode</span> = <span class="ruby-identifier">:error</span>
+      <span class="ruby-identifier">module_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="--method" class="method-detail method-alias">
+				<a name="M000050"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">=~</span><span
+						class="method-args">(object, mode = @mode)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Alias for <a href="ProtocolModule.html#M000049">check</a>
+</p>
+					
+
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="--method" class="method-detail ">
+				<a name="M000043"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">[]</span><span
+						class="method-args">(name)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return the <a href="Message.html">Message</a> object named <tt>name</tt> or
+nil, if it doesn&#8217;t exist.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 533</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="check-method" class="method-detail ">
+				<a name="M000049"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check</span><span
+						class="method-args">(object, mode = @mode)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Check the conformity of <tt>object</tt> recursively. This method returns
+either false OR true, if <tt>mode</tt> is :none or :warning, or raises an
+<a href="CheckFailed.html">CheckFailed</a>, if <tt>mode</tt> was :error.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="check-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 587</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-ivar">@mode</span>)
+      <span class="ruby-identifier">checked</span> = {}
+      <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-identifier">errors</span> = <span class="ruby-constant">CheckFailed</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">message</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">message</span>.<span class="ruby-identifier">check</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">checked</span>)
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">CheckError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">mode</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:error</span>
+            <span class="ruby-identifier">errors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:warning</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">false</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:none</span>
+            <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">false</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-identifier">errors</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">result</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+				<div class="aliases">
+					Also aliased as: <a href="ProtocolModule.html#M000050">=~</a>
+				</div>
+				
+			</div>
+
+		
+			<div id="check-failure-method" class="method-detail ">
+				<a name="M000053"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_failure</span><span
+						class="method-args">(mode)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Sets the check mode to <tt>id</tt>. <tt>id</tt> should be one of :none,
+:warning, or :error. The mode to use while doing a conformity check is
+always the root module, that is, the modes of the included modules
+aren&#8217;t important for the check.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="check-failure-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 639</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_failure</span>(<span class="ruby-identifier">mode</span>)
+      <span class="ruby-constant">CHECK_MODES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">mode</span>) <span class="ruby-keyword kw">or</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;illegal check mode #{mode}&quot;</span>
+      <span class="ruby-ivar">@mode</span> = <span class="ruby-identifier">mode</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="check-failures-method" class="method-detail ">
+				<a name="M000051"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_failures</span><span
+						class="method-args">(object)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return all messages for whick a check failed.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="check-failures-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 613</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_failures</span>(<span class="ruby-identifier">object</span>)
+      <span class="ruby-identifier">check</span> <span class="ruby-identifier">object</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">CheckFailed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">protocol_message</span> }
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="descriptors-method" class="method-detail ">
+				<a name="M000036"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">descriptors</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns all the protocol descriptions to check against as an Array.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="descriptors-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 467</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">descriptors</span>
+      <span class="ruby-identifier">descriptors</span> = []
+      <span class="ruby-identifier">protocols</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">descriptors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-identifier">:@descriptor</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">descriptors</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="each-method" class="method-detail method-alias">
+				<a name="M000046"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">each</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Alias for <a href="ProtocolModule.html#M000045">each_message</a>
+</p>
+					
+
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="each-message-method" class="method-detail ">
+				<a name="M000045"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">each_message</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Iterate over all messages and yield to all of them.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="each-message-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 544</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_message</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yields: message</span>
+      <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+				<div class="aliases">
+					Also aliased as: <a href="ProtocolModule.html#M000046">each</a>
+				</div>
+				
+			</div>
+
+		
+			<div id="grep-method" class="method-detail ">
+				<a name="M000044"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">grep</span><span
+						class="method-args">(pattern)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return all message whose names matches pattern.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="grep-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 539</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grep</span>(<span class="ruby-identifier">pattern</span>)
+      <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pattern</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span> }
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="implementation-method" class="method-detail ">
+				<a name="M000057"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">implementation</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Switch to implementation mode. Defined methods are added to the <a
+href="ProtocolModule.html">ProtocolModule</a> as instance methods.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="implementation-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 693</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">implementation</span>
+      <span class="ruby-ivar">@implementation</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="implementation--method" class="method-detail ">
+				<a name="M000058"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">implementation?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true, if the <a href="ProtocolModule.html">ProtocolModule</a> is
+currently in implementation mode. Otherwise return false.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="implementation--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 699</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">implementation?</span>
+      <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@implementation</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="included-method" class="method-detail ">
+				<a name="M000052"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">included</span><span
+						class="method-args">(modul)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+This callback is called, when a module, that was extended with <a
+href="../Protocol.html">Protocol</a>, is included (via Modul#include/via
+Class#conform_to) into some other module/class. If <tt>modul</tt> is a <a
+href="../Class.html">Class</a>, all protocol descriptions of the
+inheritance tree are collected and the given class is checked for
+conformance to the protocol. <tt>modul</tt> isn&#8217;t a <a
+href="../Class.html">Class</a> and only a Module, it is extended with the
+<a href="../Protocol.html">Protocol</a> module.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="included-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 627</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">included</span>(<span class="ruby-identifier">modul</span>)
+      <span class="ruby-keyword kw">super</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Class</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:error</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:warning</span>
+        <span class="ruby-identifier">$DEBUG</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name} is checking class #{modul}&quot;</span>
+        <span class="ruby-identifier">check</span> <span class="ruby-identifier">modul</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="inherit-method" class="method-detail ">
+				<a name="M000056"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">inherit</span><span
+						class="method-args">(modul, methodname, block_expected = nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Inherit a method signature from an instance method named
+<tt>methodname</tt> of <tt>modul</tt>. This means that this protocol should
+understand these instance methods with their arity and block expectation.
+Note that automatic detection of blocks does not work for Ruby methods
+defined in C. You can set the <tt>block_expected</tt> argument if you want
+to do this manually.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="inherit-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 677</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inherit</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">block_expected</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-constant">Module</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">modul</span> <span class="ruby-keyword kw">or</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;expected Module not #{modul.class} as modul argument&quot;</span>
+      <span class="ruby-identifier">methodnames</span> = <span class="ruby-identifier">methodname</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_ary</span>) <span class="ruby-operator">?</span>
+        <span class="ruby-identifier">methodname</span>.<span class="ruby-identifier">to_ary</span> <span class="ruby-operator">:</span>
+        [ <span class="ruby-identifier">methodname</span> ]
+      <span class="ruby-identifier">methodnames</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">methodname</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">m</span> = <span class="ruby-identifier">parse_instance_method_signature</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>)
+        <span class="ruby-identifier">block_expected</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">block_expected</span> = <span class="ruby-identifier">block_expected</span>
+        <span class="ruby-ivar">@descriptor</span>.<span class="ruby-identifier">add_message</span> <span class="ruby-identifier">m</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="inspect-method" class="method-detail ">
+				<a name="M000048"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">inspect</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns a short string representation of this protocol, that consists of
+the understood messages. This protocol
+</p>
+<pre>
+ FooProtocol = Protocol do
+   def bar(x, y, &amp;b) end
+   def baz(x, y, z) end
+   def foo(*rest) end
+ end
+</pre>
+<p>
+returns this string:
+</p>
+<pre>
+ #&lt;FooProtocol: bar(2&amp;), baz(3), foo(-1)&gt;
+</pre>
+					
+
+					
+					<div class="method-source-code"
+						id="inspect-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 580</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+      <span class="ruby-node">&quot;#&lt;#{name}: #{messages.map { |m| m.shortcut } * ', '}&gt;&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="messages-method" class="method-detail ">
+				<a name="M000039"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">messages</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns all messages this protocol (plus the included protocols) consists
+of in alphabetic order. This method caches the computed result array. You
+have to call <a href="ProtocolModule.html#M000041">reset_messages</a>, if
+you want to recompute the array in the next call to <a
+href="ProtocolModule.html#M000039">messages</a>.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="messages-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 501</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">messages</span>
+      <span class="ruby-identifier">result</span> = []
+      <span class="ruby-identifier">seen</span> = {}
+      <span class="ruby-identifier">descriptors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">dm</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">messages</span>
+        <span class="ruby-identifier">dm</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">delete</span> = <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span>]
+          <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-keyword kw">true</span>
+          <span class="ruby-identifier">delete</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">result</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">dm</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">result</span>.<span class="ruby-identifier">sort!</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+				<div class="aliases">
+					Also aliased as: <a href="ProtocolModule.html#M000040">to_a</a>
+				</div>
+				
+			</div>
+
+		
+			<div id="method-added-method" class="method-detail ">
+				<a name="M000061"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">method_added</span><span
+						class="method-args">(methodname)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Capture all added methods and either leave the implementation in place or
+add them to the protocol description.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="method-added-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 717</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_added</span>(<span class="ruby-identifier">methodname</span>)
+      <span class="ruby-identifier">methodname</span> = <span class="ruby-identifier">methodname</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">specification?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">methodname</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^__protocol_check_/</span>
+        <span class="ruby-identifier">protocol_check</span> = <span class="ruby-identifier">instance_method</span>(<span class="ruby-identifier">methodname</span>)
+        <span class="ruby-identifier">parser</span> = <span class="ruby-constant">MethodParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">methodname</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">complex?</span>
+          <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;__protocol_check_#{methodname}&quot;</span>, <span class="ruby-identifier">protocol_check</span>)
+          <span class="ruby-identifier">understand</span> <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">protocol_check</span>.<span class="ruby-identifier">arity</span>, <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">block_arg?</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">understand</span> <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">protocol_check</span>.<span class="ruby-identifier">arity</span>, <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">block_arg?</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">remove_method</span> <span class="ruby-identifier">methodname</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">super</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="protocols-method" class="method-detail ">
+				<a name="M000037"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">protocols</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return self and all protocols included into self.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="protocols-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 476</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">protocols</span>
+      <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">modul</span><span class="ruby-operator">|</span> <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ProtocolModule</span> }
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="reset-messages-method" class="method-detail ">
+				<a name="M000041"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">reset_messages</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Reset the cached message array. Call this if you want to change the
+protocol dynamically after it was already used (= the <a
+href="ProtocolModule.html#M000039">messages</a> method was called).
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="reset-messages-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 521</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset_messages</span>
+      <span class="ruby-ivar">@messages</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="specification-method" class="method-detail ">
+				<a name="M000059"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">specification</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Switch to specification mode. Defined methods are added to the protocol
+description in order to be checked against in later conformance tests.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="specification-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 705</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">specification</span>
+      <span class="ruby-ivar">@implementation</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="specification--method" class="method-detail ">
+				<a name="M000060"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">specification?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return true, if the <a href="ProtocolModule.html">ProtocolModule</a> is
+currently in specification mode. Otherwise return false.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="specification--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 711</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">specification?</span>
+      <span class="ruby-operator">!</span><span class="ruby-ivar">@implementation</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="to-a-method" class="method-detail method-alias">
+				<a name="M000040"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">to_a</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Alias for <a href="ProtocolModule.html#M000039">messages</a>
+</p>
+					
+
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="to-ruby-method" class="method-detail ">
+				<a name="M000038"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">to_ruby</span><span
+						class="method-args">(result = '')</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Concatenates the protocol as Ruby code to the <tt>result</tt> string and
+return it. At the moment this method only supports method signatures with
+generic argument names.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="to-ruby-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 483</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_ruby</span>(<span class="ruby-identifier">result</span> = <span class="ruby-value str">''</span>)
+      <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{name} = Protocol do&quot;</span>
+      <span class="ruby-identifier">first</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
+          <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_ruby</span>(<span class="ruby-identifier">result</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;end\n&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="to-s-method" class="method-detail ">
+				<a name="M000047"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">to_s</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns a string representation of this protocol, that consists of the
+understood messages. This protocol
+</p>
+<pre>
+ FooProtocol = Protocol do
+   def bar(x, y, &amp;b) end
+   def baz(x, y, z) end
+   def foo(*rest) end
+ end
+</pre>
+<p>
+returns this string:
+</p>
+<pre>
+ FooProtocol#bar(2&amp;), FooProtocol#baz(3), FooProtocol#foo(-1)
+</pre>
+					
+
+					
+					<div class="method-source-code"
+						id="to-s-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 564</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">messages</span> <span class="ruby-operator">*</span> <span class="ruby-value str">', '</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="understand-method" class="method-detail ">
+				<a name="M000054"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">understand</span><span
+						class="method-args">(methodname, arity = nil, block_expected = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+This method defines one of the messages, the protocol in question consists
+of: The messages which the class, that conforms to this protocol, should
+understand and respond to. An example shows best which
++message+descriptions_ are allowed:
+</p>
+<pre>
+ MyProtocol = Protocol do
+   understand :bar            # conforming class must respond to :bar
+   understand :baz, 3         # c. c. must respond to :baz with 3 args.
+   understand :foo, -1        # c. c. must respond to :foo, any number of args.
+   understand :quux, 0, true  # c. c. must respond to :quux, no args + block.
+   understand :quux1, 1, true # c. c. must respond to :quux, 1 arg + block.
+ end
+</pre>
+					
+
+					
+					<div class="method-source-code"
+						id="understand-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 657</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">understand</span>(<span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">arity</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">block_expected</span> = <span class="ruby-keyword kw">false</span>)
+      <span class="ruby-identifier">m</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">methodname</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">arity</span>, <span class="ruby-identifier">block_expected</span>)
+      <span class="ruby-ivar">@descriptor</span>.<span class="ruby-identifier">add_message</span>(<span class="ruby-identifier">m</span>)
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="understand--method" class="method-detail ">
+				<a name="M000042"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">understand?</span><span
+						class="method-args">(name, arity = nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns true if it is required to understand the
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="understand--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 527</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">understand?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arity</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">arity</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">arity</span>) }
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="parse-instance-method-signature-method" class="method-detail ">
+				<a name="M000055"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">parse_instance_method_signature</span><span
+						class="method-args">(modul, methodname)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="parse-instance-method-signature-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/protocol.rb, line 663</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_instance_method_signature</span>(<span class="ruby-identifier">modul</span>, <span class="ruby-identifier">methodname</span>)
+      <span class="ruby-identifier">methodname</span> = <span class="ruby-identifier">methodname</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">method</span> = <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">instance_method</span>(<span class="ruby-identifier">methodname</span>)
+      <span class="ruby-identifier">real_module</span> = <span class="ruby-constant">Utilities</span>.<span class="ruby-identifier">find_method_module</span>(<span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">modul</span>.<span class="ruby-identifier">ancestors</span>)
+      <span class="ruby-identifier">parser</span> = <span class="ruby-constant">MethodParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">real_module</span>, <span class="ruby-identifier">methodname</span>)
+      <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">methodname</span>, <span class="ruby-identifier">method</span>.<span class="ruby-identifier">arity</span>, <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">block_arg?</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
