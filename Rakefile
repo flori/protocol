@@ -9,7 +9,7 @@ include Config
 PKG_NAME = 'protocol'
 PKG_VERSION = File.read('VERSION').chomp
 PKG_FILES = FileList['**/*'].exclude(/(CVS|\.svn|pkg|coverage)/)
-CLEAN.include 'coverage', 'doc'
+CLEAN.include 'coverage', 'doc', Dir['benchmarks/data/*.*']
 
 desc "Installing library"
 task :install  do

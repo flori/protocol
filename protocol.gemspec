@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
     s.name = 'protocol'
     s.version = '0.9.0'
-    s.files = ["CHANGES", "COPYING", "Rakefile", "VERSION", "doc-main.txt", "examples", "examples/comparing.rb", "examples/enumerating.rb", "examples/game.rb", "examples/hello_world_patternitis.rb", "examples/indexing.rb", "examples/locking.rb", "examples/queue.rb", "examples/stack.rb", "install.rb", "lib", "lib/protocol", "lib/protocol.rb", "lib/protocol/core.rb", "lib/protocol/method_parser", "lib/protocol/method_parser/parse_tree.rb", "lib/protocol/method_parser/ruby_parser.rb", "lib/protocol/version.rb", "make_doc.rb", "protocol.gemspec", "tests", "tests/test_protocol.rb", "tests/test_protocol_method_parser.rb"]
+    s.files = ["CHANGES", "COPYING", "Rakefile", "VERSION", "benchmarks", "benchmarks/data", "benchmarks/method_parser.rb", "doc-main.txt", "examples", "examples/comparing.rb", "examples/enumerating.rb", "examples/game.rb", "examples/hello_world_patternitis.rb", "examples/indexing.rb", "examples/locking.rb", "examples/queue.rb", "examples/stack.rb", "install.rb", "lib", "lib/protocol", "lib/protocol.rb", "lib/protocol/core.rb", "lib/protocol/method_parser", "lib/protocol/method_parser/parse_tree.rb", "lib/protocol/method_parser/ruby_parser.rb", "lib/protocol/version.rb", "make_doc.rb", "protocol.gemspec", "tests", "tests/test_protocol.rb", "tests/test_protocol_method_parser.rb"]
     s.summary = 'Method Protocols for Ruby Classes'
     s.description = <<EOT
 This library offers an implementation of protocols against which you can check
