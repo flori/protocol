@@ -112,7 +112,7 @@ module Protocol
           end
         end
         ary = tree.to_a.flatten
-        @complex = ary.flatten.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
+        @complex = ary.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
         if ary.index(:yield) and @arg_kinds.last != :block
           @args.push :'&block'
           @arg_kinds.push :block
