@@ -23,6 +23,6 @@ EOT
 
     s.author = "Florian Frank"
     s.email = "flori@ping.de"
-    s.homepage = "http://protocol.rubyforge.org"
+    s.homepage = "http://flori.github.com/protocol"
     s.rubyforge_project = "protocol"
   end
