@@ -95,24 +95,6 @@ module Protocol
       source
     end
 
-    class ThrowingParser < RubyParser
-      class Lexer < RubyLexer
-        def rb_compile_error(*args)
-          throw :fail
-        end
-      end
-
-      def initalize
-        super
-        self.lexer = Lexer.new
-        self.lexer.parser = self
-      end
-
-      def on_error(*args)
-        throw :fail
-      end
-    end
-
     def parse_method
       @complex  = false
       filename, lineno = @method.source_location
@@ -121,14 +103,13 @@ module Protocol
         source = source[(lineno - 1)..-1].join
         current = 0
         tree = nil
-        parser = ThrowingParser.new
         while current = source.index('end', current)
           current += 3
-          catch(:fail) do
-            tree = parser.parse(source[0, current], filename)
+          begin
+            tree = RubyParser.new.parse(source[0, current], filename)
             break
+          rescue SyntaxError, Racc::ParseError
           end
-          parser.reset
         end
         ary = tree.to_a.flatten
         @complex = ary.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
