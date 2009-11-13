@@ -8,6 +8,9 @@ class MethodParserBenchmark < Bullshit::RepeatCase
 
   class Foo
     def foo(a, b = nil, *c)
+      if false then ; end
+      if false then ; end
+      if false then ; end
       yield
     end
   end
