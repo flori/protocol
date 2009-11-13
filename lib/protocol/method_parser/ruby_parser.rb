@@ -103,13 +103,15 @@ module Protocol
         source = source[(lineno - 1)..-1].join
         current = 0
         tree = nil
+        parser = RubyParser.new
         while current = source.index('end', current)
           current += 3
           begin
-            tree = RubyParser.new.parse(source[0, current], filename)
+            tree = parser.parse(source[0, current], filename)
             break
           rescue SyntaxError, Racc::ParseError
           end
+          parser.reset
         end
         ary = tree.to_a.flatten
         @complex = ary.any? { |node| [ :call, :fcall, :vcall ].include?(node) }
