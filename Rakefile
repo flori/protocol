@@ -18,8 +18,7 @@ EOT
   test_dir      'tests'
   ignore        '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '.rvmrc', '.AppleDouble'
   readme        'README.rdoc'
-  dependency    'ParseTree', '~> 3.0'
-  dependency    'ruby_parser', '~> 2.0'
+  dependency    'ruby_parser', '~> 3.0'
 
   install_library do
     file = 'lib/protocol.rb'

@@ -1,11 +1,7 @@
 require 'protocol/version'
 
 module Protocol
-  if RUBY_VERSION[/\A1\.8\./]
-    require 'protocol/method_parser/parse_tree'
-  else
-    require 'protocol/method_parser/ruby_parser'
-  end
+  require 'protocol/method_parser/ruby_parser'
 
   class ::Object
     # Returns true if this object conforms to +protocol+, otherwise false.
