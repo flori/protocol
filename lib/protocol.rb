@@ -22,6 +22,8 @@ module Protocol
     def Protocol(&block)
       ProtocolModule.new(&block)
     end
+
+    alias protocol Protocol
   end
 
   class ::Class
@@ -148,7 +150,7 @@ module Protocol
   # after the result of the wrapped method was determined.
   class Postcondition
     instance_methods.each do |m|
-      m.to_s =~ /\A(__|object_id|instance_eval\Z|inspect\Z)/ or undef_method m
+      m.to_s =~ /\A(__|object_id|instance_eval\z|inspect\z)/ or undef_method m
     end
 
     def initialize(object)

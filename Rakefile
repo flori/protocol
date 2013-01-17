@@ -1,101 +1,41 @@
-begin
-  require 'rake/gempackagetask'
-rescue LoadError
-end
-require 'rake/clean'
-require 'rbconfig'
-include Config
+# vim: set filetype=ruby et sw=2 ts=2:
 
-PKG_NAME = 'protocol'
-PKG_VERSION = File.read('VERSION').chomp
-PKG_FILES = FileList['**/*'].exclude(/(CVS|\.svn|pkg|coverage)/)
-CLEAN.include 'coverage', 'doc', Dir['benchmarks/data/*.*']
+require 'gem_hadar'
 
-desc "Installing library"
-task :install  do
-  ruby 'install.rb'
-end
-
-desc "Creating documentation"
-task :doc do
-  ruby 'make_doc.rb'
-end
-
-desc "Testing library"
-task :test  do
-  ruby '-Ilib tests/test_protocol.rb'
-end
-
-desc "Testing library (coverage)"
-task :coverage  do
-  sh 'rcov -Ilib tests/test_protocol.rb'
-end
-
-if defined? Gem
-  spec_src =<<GEM
-# -*- encoding: utf-8 -*-
-Gem::Specification.new do |s|
-    s.name = '#{PKG_NAME}'
-    s.version = '#{PKG_VERSION}'
-    s.files = #{PKG_FILES.to_a.sort.inspect}
-    s.summary = 'Method Protocols for Ruby Classes'
-    s.description = <<EOT
+GemHadar do
+    name 'protocol'
+    author      'Florian Frank'
+    email       'flori@ping.de'
+    homepage    "http://flori.github.com/#{name}"
+    summary     'Method Protocols for Ruby Classes'
+    description <<EOT
 This library offers an implementation of protocols against which you can check
 the conformity of your classes or instances of your classes. They are a bit
 like Java Interfaces, but as mixin modules they can also contain already
 implemented methods. Additionaly you can define preconditions/postconditions
 for methods specified in a protocol.
 EOT
+  test_dir      'tests'
+  ignore        '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '.rvmrc', '.AppleDouble'
+  readme        'README.rdoc'
+  dependency    'ParseTree', '~> 3.0'
+  dependency    'ruby_parser', '~> 2.0'
 
-    s.require_path = 'lib'
-    s.add_dependency 'ParseTree', '~> 3.0'
-    s.add_dependency 'ruby_parser', '~> 2.0'
+  install_library do
+    file = 'lib/protocol.rb'
+    dest = CONFIG["sitelibdir"]
+    install(file, dest)
 
-    s.has_rdoc = true
-    s.rdoc_options << '--main' << 'doc-main.txt'
-    s.extra_rdoc_files << 'doc-main.txt'
-    s.test_files << 'tests/test_protocol.rb'
+    dest = File.join(CONFIG["sitelibdir"], 'protocol')
+    mkdir_p dest
+    for file in Dir['lib/protocol/*.rb']
+      install(file, dest)
+    end
 
-    s.author = "Florian Frank"
-    s.email = "flori@ping.de"
-    s.homepage = "http://flori.github.com/#{PKG_NAME}"
-    s.rubyforge_project = "#{PKG_NAME}"
-  end
-GEM
-
-  desc 'Create a gemspec file'
-  task :gemspec do
-    File.open("#{PKG_NAME}.gemspec", 'w') do |f|
-      f.puts spec_src
+    dest = File.join(CONFIG["sitelibdir"], 'protocol', 'method_parser')
+    mkdir_p dest
+    for file in Dir['lib/protocol/method_parser/*.rb']
+      install(file, dest)
     end
   end
-
-  spec = eval(spec_src)
-  Rake::GemPackageTask.new(spec) do |pkg|
-    pkg.need_tar = true
-    pkg.package_files += PKG_FILES
-  end
 end
-
-desc m = "Writing version information for #{PKG_VERSION}"
-task :version do
-  puts m
-  File.open(File.join('lib', 'protocol', 'version.rb'), 'w') do |v|
-    v.puts <<EOT
-module Protocol
-  # Protocol version
-  VERSION         = '#{PKG_VERSION}'
-  VERSION_ARRAY   = VERSION.split(/\\./).map { |x| x.to_i } # :nodoc:
-  VERSION_MAJOR   = VERSION_ARRAY[0] # :nodoc:
-  VERSION_MINOR   = VERSION_ARRAY[1] # :nodoc:
-  VERSION_BUILD   = VERSION_ARRAY[2] # :nodoc:
-end
-EOT
-  end
-end
-
-desc "Default task"
-task :default => [ :version, :gemspec, :test ]
-
-desc "Prepare a release"
-task :release => [  :clean, :version, :gemspec, :package ]
