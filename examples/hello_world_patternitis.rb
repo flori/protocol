@@ -17,7 +17,7 @@ MessageBodyProtocol = Protocol do
   def configure(obj)
     precondition { obj.respond_to? :to_str }
   end
-  
+
   def send(message_strategy)
     MessageStrategyProtocol =~ message_strategy
     precondition { payload.respond_to? :to_str }

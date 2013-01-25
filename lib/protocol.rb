@@ -2,6 +2,7 @@ require 'protocol/version'
 
 module Protocol
   require 'protocol/method_parser/ruby_parser'
+  require 'protocol/utilities'
 
   class ::Object
     # Returns true if this object conforms to +protocol+, otherwise false.
@@ -449,7 +450,7 @@ module Protocol
     end
   end
 
-  # A ProtocolModule object 
+  # A ProtocolModule object
   class ProtocolModule < Module
     # Creates an new ProtocolModule instance.
     def initialize(&block)
@@ -521,7 +522,7 @@ module Protocol
       self
     end
 
-    # Returns true if it is required to understand the 
+    # Returns true if it is required to understand the
     def understand?(name, arity = nil)
       name = name.to_s
       !!find { |m| m.name == name && (!arity || m.arity == arity) }
@@ -639,7 +640,7 @@ module Protocol
         raise ArgumentError, "illegal check mode #{mode}"
       @mode = mode
     end
-   
+
     # This method defines one of the messages, the protocol in question
     # consists of: The messages which the class, that conforms to this
     # protocol, should understand and respond to. An example shows best
@@ -727,26 +728,6 @@ module Protocol
       else
         super
       end
-    end
-  end
-
-  # A module for some Utility methods.
-  module Utilities
-    module_function
-
-    # This Method tries to find the first module that implements the method
-    # named +methodname+ in the array of +ancestors+. If this fails nil is
-    # returned.
-    def find_method_module(methodname, ancestors)
-      methodname = methodname.to_s
-      ancestors.each do |a|
-        begin
-          a.instance_method(methodname)
-          return a
-        rescue NameError
-        end
-      end
-      nil
     end
   end
 end

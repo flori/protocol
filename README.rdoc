@@ -1,4 +1,4 @@
-== Protocol - Method Protocol Specifications in Ruby 
+== Protocol - Method Protocol Specifications in Ruby
 
 === Author
 
@@ -57,11 +57,11 @@ An example of a conforming class is the class +Ary+:
    def initialize
      @ary = [1, 2, 3]
    end
- 
+
    def each(&block)
      @ary.each(&block)
    end
- 
+
    conform_to Enumerating
  end
 
@@ -84,13 +84,13 @@ like this:
   Locking = Protocol do
     specification # not necessary, because Protocol defaults to specification
                   # mode already
-  
+
     def lock() end
-    
+
     def unlock() end
-  
+
     implementation
-  
+
     def synchronize
       lock
       begin
@@ -134,7 +134,7 @@ implemtented methods, to make block based locking possbile:
  mutex.synchronize do
    puts "Synchronized with '#{file.path}'."
  end
- 
+
 Now it's easy to swap the implementation to a memory based mutex
 implementation instead:
 
@@ -198,15 +198,15 @@ shows how:
      postcondition { top === x }
      postcondition { result === myself }
    end
- 
+
    def top() end
- 
+
    def size() end
- 
+
    def empty?()
      postcondition { size === 0 ? result : !result }
    end
- 
+
    def pop()
      s = size
      precondition { not empty? }

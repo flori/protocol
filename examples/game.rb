@@ -2,7 +2,7 @@ require 'protocol'
 
 # Small example of the template method pattern with Protocol. (I think, it was
 # inspired by this wikipedia article:
-# http://en.wikipedia.org/wiki/Template_method_pattern 
+# http://en.wikipedia.org/wiki/Template_method_pattern
 Gaming = Protocol do
   # defaults to specification mode
 

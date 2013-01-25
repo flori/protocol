@@ -1,67 +1,66 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
-require 'protocol'
+require 'test_helper'
 
-class TestProtocol < Test::Unit::TestCase
-  TestProtocol_foo = Protocol do
+class ProtocolTest < Test::Unit::TestCase
+  ProtocolTest_foo = Protocol do
     check_failure :none
 
     understand :foo
   end
 
-  TestProtocol_foo_fail = Protocol do
+  ProtocolTest_foo_fail = Protocol do
     understand :foo
   end
 
-  TestProtocol_bar = Protocol do
+  ProtocolTest_bar = Protocol do
     understand :bar
   end
 
-  TestProtocol_foo_bar_1 = Protocol do
-    include TestProtocol::TestProtocol_foo
+  ProtocolTest_foo_bar_1 = Protocol do
+    include ProtocolTest::ProtocolTest_foo
     understand :bar
   end
 
-  TestProtocol_foo_bar_1_fail = Protocol do
-    include TestProtocol::TestProtocol_foo
+  ProtocolTest_foo_bar_1_fail = Protocol do
+    include ProtocolTest::ProtocolTest_foo
     understand :bar
   end
 
-  TestProtocol_foo_bar_2 = Protocol do
-    include TestProtocol::TestProtocol_foo
-    include TestProtocol::TestProtocol_bar
+  ProtocolTest_foo_bar_2 = Protocol do
+    include ProtocolTest::ProtocolTest_foo
+    include ProtocolTest::ProtocolTest_bar
   end
 
-  TestProtocol_foo_bar_2_fail = Protocol do
+  ProtocolTest_foo_bar_2_fail = Protocol do
     check_failure :error
 
-    include TestProtocol::TestProtocol_foo
-    include TestProtocol::TestProtocol_bar
+    include ProtocolTest::ProtocolTest_foo
+    include ProtocolTest::ProtocolTest_bar
   end
 
-  TestProtocolArgs = Protocol do
+  ProtocolTestArgs = Protocol do
     understand :bar, 2
     understand :baz, 3
     understand :foo, -1
   end
 
-  TestProtocolArgsOverwritten = Protocol do
-    include TestProtocol::TestProtocolArgs
+  ProtocolTestArgsOverwritten = Protocol do
+    include ProtocolTest::ProtocolTestArgs
 
     def bar(a, b, c)
     end
-    
+
     def foo(a)
     end
   end
 
-  TestProtocolBlock = Protocol do
+  ProtocolTestBlock = Protocol do
     def foo(x, &block)
     end
   end
 
-  TestProtocolPartial = Protocol do
+  ProtocolTestPartial = Protocol do
     check_failure :none
 
     implementation
@@ -77,7 +76,7 @@ class TestProtocol < Test::Unit::TestCase
     def each(&block) end
   end
 
-  TestProtocolPartial_fail = Protocol do
+  ProtocolTestPartial_fail = Protocol do
     check_failure :error
 
     def each(&block) end
@@ -91,22 +90,22 @@ class TestProtocol < Test::Unit::TestCase
     end
   end
 
-  TestProtocolWrapMethodPassedFoo = Protocol do
+  ProtocolTestWrapMethodPassedFoo = Protocol do
     def foo(foo, *rest) end
   end
 
-  TestProtocolWrapMethodPassedBar = Protocol do
+  ProtocolTestWrapMethodPassedBar = Protocol do
     def bar() end
   end
 
-  TestProtocolWrapMethod = Protocol do
+  ProtocolTestWrapMethod = Protocol do
     def foo_bar(foo, bar)
-      ::TestProtocol::TestProtocolWrapMethodPassedFoo =~ foo
-      ::TestProtocol::TestProtocolWrapMethodPassedBar =~ bar
+      ::ProtocolTest::ProtocolTestWrapMethodPassedFoo =~ foo
+      ::ProtocolTest::ProtocolTestWrapMethodPassedBar =~ bar
     end
   end
 
-  TestProtocolPostcondition = Protocol do
+  ProtocolTestPostcondition = Protocol do
     def foo_bar(foo, bar)
       postcondition { foo + bar == result }
     end
@@ -116,7 +115,7 @@ class TestProtocol < Test::Unit::TestCase
     end
   end
 
-  TestProtocolPrecondition = Protocol do
+  ProtocolTestPrecondition = Protocol do
     def foo_bar(foo, bar)
       precondition { foo == 5 }
       precondition { bar == 7 }
@@ -127,11 +126,11 @@ class TestProtocol < Test::Unit::TestCase
     def one_with_block(foo, &block) end
   end
 
-  TestProtocolInheritance = Protocol do
-    inherit TestProtocol::MyClass, :one_with_block
+  ProtocolTestInheritance = Protocol do
+    inherit ProtocolTest::MyClass, :one_with_block
   end
 
-  TestProtocolInheritanceC = Protocol do
+  ProtocolTestInheritanceC = Protocol do
     inherit ::Array, :each, true
   end
 
@@ -170,46 +169,46 @@ class TestProtocol < Test::Unit::TestCase
     c1 = Class.new do
       def foo; end
 
-      conform_to TestProtocol_foo
+      conform_to ProtocolTest_foo
     end
-    assert c1.conform_to?(TestProtocol_foo)
-    assert c1.new.conform_to?(TestProtocol_foo)
-    assert !c1.conform_to?(TestProtocol_foo_bar_1)
-    assert !c1.new.conform_to?(TestProtocol_foo_bar_1)
-    assert !c1.conform_to?(TestProtocol_bar)
-    assert !c1.new.conform_to?(TestProtocol_bar)
-    assert_equal 2, TestProtocol_foo_bar_1.check_failures(Object).size
-    assert_equal 2, TestProtocol_foo_bar_1.check_failures(Object.new).size
-    assert_equal 1, TestProtocol_foo_bar_1.check_failures(c1).size
-    assert_equal 1, TestProtocol_foo_bar_1.check_failures(c1.new).size
+    assert c1.conform_to?(ProtocolTest_foo)
+    assert c1.new.conform_to?(ProtocolTest_foo)
+    assert !c1.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c1.new.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c1.conform_to?(ProtocolTest_bar)
+    assert !c1.new.conform_to?(ProtocolTest_bar)
+    assert_equal 2, ProtocolTest_foo_bar_1.check_failures(Object).size
+    assert_equal 2, ProtocolTest_foo_bar_1.check_failures(Object.new).size
+    assert_equal 1, ProtocolTest_foo_bar_1.check_failures(c1).size
+    assert_equal 1, ProtocolTest_foo_bar_1.check_failures(c1.new).size
 
     c2 = Class.new do
-      conform_to TestProtocol_foo
+      conform_to ProtocolTest_foo
     end
-    assert !c2.conform_to?(TestProtocol_foo)
-    assert !c2.new.conform_to?(TestProtocol_foo)
-    assert !c2.conform_to?(TestProtocol_foo_bar_1)
-    assert !c2.new.conform_to?(TestProtocol_foo_bar_1)
-    assert !c2.conform_to?(TestProtocol_bar)
-    assert !c2.new.conform_to?(TestProtocol_bar)
+    assert !c2.conform_to?(ProtocolTest_foo)
+    assert !c2.new.conform_to?(ProtocolTest_foo)
+    assert !c2.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c2.new.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c2.conform_to?(ProtocolTest_bar)
+    assert !c2.new.conform_to?(ProtocolTest_bar)
   end
 
   def test_simple_with_fail
     c1 = Class.new do
       def foo; end
 
-      conform_to TestProtocol_foo_fail
+      conform_to ProtocolTest_foo_fail
     end
-    assert c1.conform_to?(TestProtocol_foo_fail)
-    assert c1.new.conform_to?(TestProtocol_foo_fail)
-    assert !c1.conform_to?(TestProtocol_foo_bar_1)
-    assert !c1.new.conform_to?(TestProtocol_foo_bar_1)
-    assert !c1.conform_to?(TestProtocol_bar)
-    assert !c1.new.conform_to?(TestProtocol_bar)
+    assert c1.conform_to?(ProtocolTest_foo_fail)
+    assert c1.new.conform_to?(ProtocolTest_foo_fail)
+    assert !c1.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c1.new.conform_to?(ProtocolTest_foo_bar_1)
+    assert !c1.conform_to?(ProtocolTest_bar)
+    assert !c1.new.conform_to?(ProtocolTest_bar)
 
     begin
       c2 = Class.new do
-        conform_to TestProtocol_foo_fail
+        conform_to ProtocolTest_foo_fail
       end
       assert(false)
     rescue Protocol::CheckFailed
@@ -223,7 +222,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c = Class.new do
         def bar; end
-        conform_to TestProtocol_foo_bar_1_fail
+        conform_to ProtocolTest_foo_bar_1_fail
       end
       assert(false)
     rescue Protocol::CheckFailed
@@ -237,18 +236,18 @@ class TestProtocol < Test::Unit::TestCase
     c = Class.new do
       def foo; end
       def bar; end
-      conform_to TestProtocol_foo_bar_1
+      conform_to ProtocolTest_foo_bar_1
     end
     assert(true)
-    assert c.conform_to?(TestProtocol_foo_bar_1)
+    assert c.conform_to?(ProtocolTest_foo_bar_1)
   end
 
   def test_inclusion3
     c = Class.new do
       def bar; end
-      conform_to TestProtocol_foo_bar_2
+      conform_to ProtocolTest_foo_bar_2
     end
-    assert !c.conform_to?(TestProtocol_foo_bar_2)
+    assert !c.conform_to?(ProtocolTest_foo_bar_2)
     assert(false)
   rescue Protocol::CheckFailed
     assert(true)
@@ -264,10 +263,10 @@ class TestProtocol < Test::Unit::TestCase
       def foo(*x) x end
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
 
-      conform_to TestProtocolArgs
+      conform_to ProtocolTestArgs
     end
-    assert c.conform_to?(TestProtocolArgs)
-    assert c.new.conform_to?(TestProtocolArgs)
+    assert c.conform_to?(ProtocolTestArgs)
+    assert c.new.conform_to?(ProtocolTestArgs)
   rescue
     assert(false)
   end
@@ -278,7 +277,7 @@ class TestProtocol < Test::Unit::TestCase
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
       def foo(x) x end
 
-      conform_to TestProtocolArgs
+      conform_to ProtocolTestArgs
     end
     assert(false)
   rescue Protocol::CheckFailed
@@ -293,7 +292,7 @@ class TestProtocol < Test::Unit::TestCase
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
       def foo(x) x end
 
-      conform_to TestProtocolArgs
+      conform_to ProtocolTestArgs
     end
   rescue Protocol::CheckFailed
     assert(true)
@@ -306,7 +305,7 @@ class TestProtocol < Test::Unit::TestCase
       c1 = Class.new do
         def foo(x) end
 
-        conform_to TestProtocolBlock
+        conform_to ProtocolTestBlock
       end
     rescue Protocol::CheckFailed
       assert(true)
@@ -316,12 +315,12 @@ class TestProtocol < Test::Unit::TestCase
     c1b = Class.new do
       def foo(x) end
     end
-    assert !c1b.new.conform_to?(TestProtocolBlock)
+    assert !c1b.new.conform_to?(ProtocolTestBlock)
     begin
       c2 = Class.new do
         def foo(x, &block) block[x] end
 
-        conform_to TestProtocolBlock
+        conform_to ProtocolTestBlock
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -333,7 +332,7 @@ class TestProtocol < Test::Unit::TestCase
       c3 = Class.new do
         def foo(x) yield x end
 
-        conform_to TestProtocolBlock
+        conform_to ProtocolTestBlock
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -342,9 +341,9 @@ class TestProtocol < Test::Unit::TestCase
       assert(false)
     end
     obj = Object.new
-    assert !obj.conform_to?(TestProtocolBlock)
+    assert !obj.conform_to?(ProtocolTestBlock)
     def obj.foo(x, &b) end
-    assert obj.conform_to?(TestProtocolBlock)
+    assert obj.conform_to?(ProtocolTestBlock)
   end
 
   def test_partial_without_fail
@@ -354,19 +353,19 @@ class TestProtocol < Test::Unit::TestCase
         self
       end
 
-      conform_to TestProtocolPartial
+      conform_to ProtocolTestPartial
     end
     obj = c1.new
-    assert c1.conform_to?(TestProtocolPartial)
-    assert obj.conform_to?(TestProtocolPartial)
+    assert c1.conform_to?(ProtocolTestPartial)
+    assert obj.conform_to?(ProtocolTestPartial)
     assert_equal [ 1, 4, 9], obj.map { |x| x * x }
     assert_equal obj, obj.each { |x| x * x }
 
     c2 = Class.new do
-      conform_to TestProtocolPartial
+      conform_to ProtocolTestPartial
     end
-    assert !c2.conform_to?(TestProtocolPartial)
-    assert !c2.new.conform_to?(TestProtocolPartial)
+    assert !c2.conform_to?(ProtocolTestPartial)
+    assert !c2.new.conform_to?(ProtocolTestPartial)
     assert_raises(NoMethodError) { c2.new.map { |x| x * x } }
     assert_equal obj, obj.each { |x| x * x }
   end
@@ -378,17 +377,17 @@ class TestProtocol < Test::Unit::TestCase
         self
       end
 
-      conform_to TestProtocolPartial_fail
+      conform_to ProtocolTestPartial_fail
     end
     obj = c1.new
-    assert c1.conform_to?(TestProtocolPartial)
-    assert obj.conform_to?(TestProtocolPartial)
+    assert c1.conform_to?(ProtocolTestPartial)
+    assert obj.conform_to?(ProtocolTestPartial)
     assert_equal [ 1, 4, 9], obj.map { |x| x * x }
     assert_equal obj, obj.each { |x| x * x }
 
     begin
       c2 = Class.new do
-        conform_to TestProtocolPartial_fail
+        conform_to ProtocolTestPartial_fail
       end
       assert(false)
     rescue Protocol::CheckFailed
@@ -404,9 +403,9 @@ class TestProtocol < Test::Unit::TestCase
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
       def foo(x) x end
 
-      conform_to TestProtocolArgsOverwritten
+      conform_to ProtocolTestArgsOverwritten
     end
-    assert c.conform_to?(TestProtocolArgsOverwritten)
+    assert c.conform_to?(ProtocolTestArgsOverwritten)
   rescue Protocol::CheckFailed
     assert(false)
   rescue
@@ -414,12 +413,12 @@ class TestProtocol < Test::Unit::TestCase
   end
 
   def test_messages
-    assert_equal %w[bar baz foo], TestProtocolArgs.messages.map { |x| x.name }
-    assert_equal [2, 3, -1], TestProtocolArgs.messages.map { |x| x.arity }
-    assert_equal "TestProtocol::TestProtocolArgs#bar(2), TestProtocol::TestProtocolArgs#baz(3), TestProtocol::TestProtocolArgs#foo(-1)", TestProtocolArgs.to_s
-    assert_equal %w[bar baz foo], TestProtocolArgsOverwritten.messages.map { |x| x.name }
-    assert_equal [3, 3, 1], TestProtocolArgsOverwritten.messages.map { |x| x.arity }
-    assert_equal "TestProtocol::TestProtocolArgsOverwritten#bar(3), TestProtocol::TestProtocolArgs#baz(3), TestProtocol::TestProtocolArgsOverwritten#foo(1)", TestProtocolArgsOverwritten.to_s
+    assert_equal %w[bar baz foo], ProtocolTestArgs.messages.map { |x| x.name }
+    assert_equal [2, 3, -1], ProtocolTestArgs.messages.map { |x| x.arity }
+    assert_equal "ProtocolTest::ProtocolTestArgs#bar(2), ProtocolTest::ProtocolTestArgs#baz(3), ProtocolTest::ProtocolTestArgs#foo(-1)", ProtocolTestArgs.to_s
+    assert_equal %w[bar baz foo], ProtocolTestArgsOverwritten.messages.map { |x| x.name }
+    assert_equal [3, 3, 1], ProtocolTestArgsOverwritten.messages.map { |x| x.arity }
+    assert_equal "ProtocolTest::ProtocolTestArgsOverwritten#bar(3), ProtocolTest::ProtocolTestArgs#baz(3), ProtocolTest::ProtocolTestArgsOverwritten#foo(1)", ProtocolTestArgsOverwritten.to_s
   end
 
   def test_wrapped_method
@@ -427,7 +426,7 @@ class TestProtocol < Test::Unit::TestCase
       c1 = Class.new do
         def foo(foo, *rest) foo end
 
-        conform_to TestProtocolWrapMethodPassedFoo
+        conform_to ProtocolTestWrapMethodPassedFoo
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -439,7 +438,7 @@ class TestProtocol < Test::Unit::TestCase
       c2 = Class.new do
         def bar() :bar end
 
-        conform_to TestProtocolWrapMethodPassedBar
+        conform_to ProtocolTestWrapMethodPassedBar
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -453,7 +452,7 @@ class TestProtocol < Test::Unit::TestCase
           [ foo.foo(:foo, :baz), bar.bar ]
         end
 
-        conform_to TestProtocolWrapMethod
+        conform_to ProtocolTestWrapMethod
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -485,7 +484,7 @@ class TestProtocol < Test::Unit::TestCase
           foo + bar
         end
 
-        conform_to TestProtocolPrecondition
+        conform_to ProtocolTestPrecondition
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -508,7 +507,7 @@ class TestProtocol < Test::Unit::TestCase
           bars.unshift foo
         end
 
-        conform_to TestProtocolPostcondition
+        conform_to ProtocolTestPostcondition
       end
       c2 = Class.new do
         def foo_bar(foo, bar)
@@ -519,7 +518,7 @@ class TestProtocol < Test::Unit::TestCase
           bars.unshift foo
         end
 
-        conform_to TestProtocolPostcondition
+        conform_to ProtocolTestPostcondition
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -538,7 +537,7 @@ class TestProtocol < Test::Unit::TestCase
     def o1.foo_bars(foo, *bars)
       bars.unshift foo
     end
-    assert TestProtocolPostcondition =~ o1
+    assert ProtocolTestPostcondition =~ o1
     assert_equal [5, 7], o1.foo_bars(5, 7)
     assert_equal 5 + 7, o1.foo_bar(5, 7)
     o2 = Object.new
@@ -548,7 +547,7 @@ class TestProtocol < Test::Unit::TestCase
     def o2.foo_bars(foo, *bars)
       bars.unshift foo
     end
-    assert TestProtocolPostcondition =~ o2
+    assert ProtocolTestPostcondition =~ o2
     assert_equal [5, 7], o2.foo_bars(5, 7)
     assert_raises(Protocol::PostconditionCheckError) { o2.foo_bar(5, 7) }
   end
@@ -556,7 +555,7 @@ class TestProtocol < Test::Unit::TestCase
   def test_inheritance
     begin
       c1 = Class.new do
-        conform_to TestProtocolInheritance
+        conform_to ProtocolTestInheritance
       end
     rescue Protocol::CheckFailed
       assert(true)
@@ -566,7 +565,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c2 = Class.new do
         def one_with_block() end
-        conform_to TestProtocolInheritance
+        conform_to ProtocolTestInheritance
       end
     rescue Protocol::CheckFailed
       assert(true)
@@ -576,7 +575,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c3 = Class.new do
         def one_with_block(foo) end
-        conform_to TestProtocolInheritance
+        conform_to ProtocolTestInheritance
       end
     rescue Protocol::CheckFailed
       assert(true)
@@ -586,7 +585,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c4 = Class.new do
         def one_with_block(foo, &block) end
-        conform_to TestProtocolInheritance
+        conform_to ProtocolTestInheritance
       end
       assert(true)
     rescue Protocol::CheckFailed
@@ -597,7 +596,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c5 = Class.new do
         def each() end
-        conform_to TestProtocolInheritanceC
+        conform_to ProtocolTestInheritanceC
       end
     rescue Protocol::CheckFailed
       assert(true)
@@ -607,7 +606,7 @@ class TestProtocol < Test::Unit::TestCase
     begin
       c6 = Class.new do
         def each(&block) end
-        conform_to TestProtocolInheritanceC
+        conform_to ProtocolTestInheritanceC
       end
       assert(true)
     rescue Protocol::CheckFailed

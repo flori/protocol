@@ -5,7 +5,7 @@ Locking = Protocol do
                 # mode already
 
   def lock() end
-  
+
   def unlock() end
 
   implementation

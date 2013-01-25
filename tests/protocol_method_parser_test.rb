@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
-require 'protocol'
+require 'test_helper'
 
-class TestProtocolMethodParser < Test::Unit::TestCase
+class ProtocolMethodParserTest < Test::Unit::TestCase
   include Protocol
 
   class A
