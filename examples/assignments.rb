@@ -21,6 +21,7 @@ Assignments = Protocol do
   def add(assignable)
     Assignable =~ assignable
     assignments << assignable
+    self
   end
 
   def assign(assignable, assignee)
@@ -49,4 +50,10 @@ class User
   conform_to Assignee
 end
 
-Project.new.assign(Task.new, User.new)
+p Project.new.assign(Task.new, User.new)
+p Project.new.assign(Task.new, Object.new)
+begin
+  Project.new.assign(Object.new, Task.new)
+rescue Protocol::CheckError => e
+  p e
+end
