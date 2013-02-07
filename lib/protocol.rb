@@ -14,6 +14,10 @@ module Protocol
       protocol.check(self, :none)
     end
 
+    def conform_to!(protocol)
+      extend(protocol)
+    end
+
     # Define a protocol configured by +block+. Look at the methods of
     # ProtocolModule to get an idea on how to do that.
     def Protocol(&block)
@@ -628,6 +632,14 @@ module Protocol
       if modul.is_a? Class and @mode == :error or @mode == :warning
         $DEBUG and warn "#{name} is checking class #{modul}"
         check modul
+      end
+    end
+
+    def extend_object(object)
+      super
+      if @mode == :error or @mode == :warning
+        $DEBUG and warn "#{name} is checking class #{object}"
+        check object
       end
     end
 
