@@ -87,6 +87,7 @@ module Protocol
         begin
           source = IO.readlines(filename)
           cache[filename] = source
+          $DEBUG and warn "#{self.class} just cached #{filename.inspect}."
         rescue SystemCallError => e
           $DEBUG and warn "Caught #{e.class}: #{e}"
           nil
