@@ -15,6 +15,7 @@ like Java Interfaces, but as mixin modules they can also contain already
 implemented methods. Additionaly you can define preconditions/postconditions
 for methods specified in a protocol.
 EOT
+  licenses               << 'GPL-2'
   test_dir               'tests'
   ignore                 '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '.rvmrc', '.AppleDouble'
   readme                 'README.rdoc'
