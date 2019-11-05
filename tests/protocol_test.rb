@@ -4,8 +4,6 @@ require 'test_helper'
 
 class ProtocolTest < Test::Unit::TestCase
   ProtocolTest_foo = Protocol do
-    check_failure :none
-
     understand :foo
   end
 
@@ -33,8 +31,6 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   ProtocolTest_foo_bar_2_fail = Protocol do
-    check_failure :error
-
     include ProtocolTest::ProtocolTest_foo
     include ProtocolTest::ProtocolTest_bar
   end
@@ -61,8 +57,6 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   ProtocolTestPartial = Protocol do
-    check_failure :none
-
     implementation
 
     def map(&block)
@@ -77,8 +71,6 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   ProtocolTestPartial_fail = Protocol do
-    check_failure :error
-
     def each(&block) end
 
     implementation
@@ -127,11 +119,11 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   ProtocolTestInheritance = Protocol do
-    inherit ProtocolTest::MyClass, :one_with_block
+    infer ProtocolTest::MyClass, :one_with_block
   end
 
   ProtocolTestInheritanceC = Protocol do
-    inherit ::Array, :each, true
+    infer ::Array, :each, true
   end
 
   def test_define_protocol
@@ -141,7 +133,7 @@ class ProtocolTest < Test::Unit::TestCase
     end
     assert_kind_of Protocol::ProtocolModule, foo_protocol
     assert_raises(Protocol::SpecificationError) do
-      foo2_protocol = Protocol do
+      Protocol do
         understand :foo
         understand :foo
       end
@@ -183,7 +175,7 @@ class ProtocolTest < Test::Unit::TestCase
     assert_equal 1, ProtocolTest_foo_bar_1.check_failures(c1.new).size
 
     c2 = Class.new do
-      conform_to ProtocolTest_foo
+      conform_to? ProtocolTest_foo
     end
     assert !c2.conform_to?(ProtocolTest_foo)
     assert !c2.new.conform_to?(ProtocolTest_foo)
@@ -207,7 +199,7 @@ class ProtocolTest < Test::Unit::TestCase
     assert !c1.new.conform_to?(ProtocolTest_bar)
 
     begin
-      c2 = Class.new do
+      Class.new do
         conform_to ProtocolTest_foo_fail
       end
       assert(false)
@@ -220,7 +212,7 @@ class ProtocolTest < Test::Unit::TestCase
 
   def test_inclusion1_with_fail
     begin
-      c = Class.new do
+      Class.new do
         def bar; end
         conform_to ProtocolTest_foo_bar_1_fail
       end
@@ -272,7 +264,7 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   def test_arity2
-    c = Class.new do
+    Class.new do
       def bar(x, y) x + y end
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
       def foo(x) x end
@@ -287,7 +279,7 @@ class ProtocolTest < Test::Unit::TestCase
   end
 
   def test_arity3
-    c = Class.new do
+    Class.new do
       def bar(x, y) x + y end
       def baz(x, y, z) Math.sqrt(x * x + y * y + z * z) end
       def foo(x) x end
@@ -302,7 +294,7 @@ class ProtocolTest < Test::Unit::TestCase
 
   def test_block
     begin
-      c1 = Class.new do
+      Class.new do
         def foo(x) end
 
         conform_to ProtocolTestBlock
@@ -317,7 +309,7 @@ class ProtocolTest < Test::Unit::TestCase
     end
     assert !c1b.new.conform_to?(ProtocolTestBlock)
     begin
-      c2 = Class.new do
+      Class.new do
         def foo(x, &block) block[x] end
 
         conform_to ProtocolTestBlock
@@ -329,7 +321,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c3 = Class.new do
+      Class.new do
         def foo(x) yield x end
 
         conform_to ProtocolTestBlock
@@ -344,30 +336,6 @@ class ProtocolTest < Test::Unit::TestCase
     assert !obj.conform_to?(ProtocolTestBlock)
     def obj.foo(x, &b) end
     assert obj.conform_to?(ProtocolTestBlock)
-  end
-
-  def test_partial_without_fail
-    c1 = Class.new do
-      def each(&block)
-        (1..3).each(&block)
-        self
-      end
-
-      conform_to ProtocolTestPartial
-    end
-    obj = c1.new
-    assert c1.conform_to?(ProtocolTestPartial)
-    assert obj.conform_to?(ProtocolTestPartial)
-    assert_equal [ 1, 4, 9], obj.map { |x| x * x }
-    assert_equal obj, obj.each { |x| x * x }
-
-    c2 = Class.new do
-      conform_to ProtocolTestPartial
-    end
-    assert !c2.conform_to?(ProtocolTestPartial)
-    assert !c2.new.conform_to?(ProtocolTestPartial)
-    assert_raises(NoMethodError) { c2.new.map { |x| x * x } }
-    assert_equal obj, obj.each { |x| x * x }
   end
 
   def test_partial_with_fail
@@ -386,7 +354,7 @@ class ProtocolTest < Test::Unit::TestCase
     assert_equal obj, obj.each { |x| x * x }
 
     begin
-      c2 = Class.new do
+      Class.new do
         conform_to ProtocolTestPartial_fail
       end
       assert(false)
@@ -552,9 +520,9 @@ class ProtocolTest < Test::Unit::TestCase
     assert_raises(Protocol::PostconditionCheckError) { o2.foo_bar(5, 7) }
   end
 
-  def test_inheritance
+  def test_inference
     begin
-      c1 = Class.new do
+      Class.new do
         conform_to ProtocolTestInheritance
       end
     rescue Protocol::CheckFailed
@@ -563,7 +531,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c2 = Class.new do
+      Class.new do
         def one_with_block() end
         conform_to ProtocolTestInheritance
       end
@@ -573,7 +541,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c3 = Class.new do
+      Class.new do
         def one_with_block(foo) end
         conform_to ProtocolTestInheritance
       end
@@ -583,7 +551,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c4 = Class.new do
+      Class.new do
         def one_with_block(foo, &block) end
         conform_to ProtocolTestInheritance
       end
@@ -594,7 +562,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c5 = Class.new do
+      Class.new do
         def each() end
         conform_to ProtocolTestInheritanceC
       end
@@ -604,7 +572,7 @@ class ProtocolTest < Test::Unit::TestCase
       assert(false)
     end
     begin
-      c6 = Class.new do
+      Class.new do
         def each(&block) end
         conform_to ProtocolTestInheritanceC
       end

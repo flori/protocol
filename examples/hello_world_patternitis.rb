@@ -72,6 +72,4 @@ class HelloWorld
   end
 end
 
-if $0 == __FILE__
-  HelloWorld.main(*ARGV)
-end
+HelloWorld.main(*ARGV)

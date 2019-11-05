@@ -20,3 +20,27 @@ Enumerating = Protocol do
 
   include Enumerable
 end
+
+# Checks if indexing behaviour exists as in Array or Hash.
+Indexing = Protocol do
+  understand :[]
+
+  understand :[]=
+end
+
+Synchronizing = Protocol do
+  def lock() end
+
+  def unlock() end
+
+  implementation
+
+  def synchronize
+    lock
+    begin
+      yield
+    ensure
+      unlock
+    end
+  end
+end

@@ -1,12 +1,6 @@
-require 'protocol'
+#!/usr/bin/env ruby
 
-Enumerating = Protocol do
-  # Iterate over each element of this Enumerating class and pass it to the
-  # _block_.
-  def each(&block) end
-
-  include Enumerable
-end
+require 'protocol/core'
 
 begin
   class FailAry
@@ -19,9 +13,10 @@ begin
 
     conform_to Enumerating
   end
-  puts "Should have thrown Protocol::CheckFailed!"
 rescue Protocol::CheckFailed => e
   p e # => "Enumerating#each(0&): expected a block argument for FailAry"
+else
+  puts "Should have thrown Protocol::CheckFailed!"
 end
 
 class Ary
@@ -39,8 +34,6 @@ end
 puts Ary.new.map { |x| x * x }.inspect      + " ([1, 4, 9])"
 puts Ary.conform_to?(Enumerating).to_s      + " (true)"
 puts Ary.new.conform_to?(Enumerating).to_s  + " (true)"
-
-Enumerating.check_failure :none
 
 class FailAry2
   def initialize

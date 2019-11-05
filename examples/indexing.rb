@@ -1,28 +1,21 @@
-require 'protocol'
+#!/usr/bin/env ruby
 
-Indexing = Protocol {
-  check_failure :error
+require 'protocol/core'
 
-  understand :[]
+class Array
+  conform_to Indexing
+end
 
-  understand :[]=
-}
+class Hash
+  conform_to Indexing
+end
 
-if $0 == __FILE__
-  class Array
+begin
+  class Proc
     conform_to Indexing
   end
-
-  class Hash
-    conform_to Indexing
-  end
-
-  begin
-    class Proc
-      conform_to Indexing
-    end
+rescue Protocol::CheckFailed => e
+  p e
+else
   puts "Should have thrown Protocol::CheckFailed!"
-  rescue Protocol::CheckFailed => e
-    p e
-  end
 end

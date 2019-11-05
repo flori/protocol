@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'protocol'
 
 # Queue + Observer example.
@@ -27,8 +29,7 @@ end
 
 class SneakyO
   def after_enq(q)
-    puts "Enqueued."
-    q.deq
+    puts "Enqueued, actually Sneakily dequeued #{q.deq}."
   end
 
   def after_deq(q)
@@ -130,9 +131,10 @@ q.observer = O.new
 should_be q.empty?, true
 begin
   q.deq
-  puts "Should have thrown Protocol::CheckFailed!"
 rescue Protocol::CheckError => e
   p e
+else
+  puts "Should have thrown Protocol::CheckFailed!"
 end
 should_be q.empty?, true
 should_be q.size, 0
@@ -151,7 +153,8 @@ should_be q.deq, 2
 should_be q.empty?, true
 begin
   q.enq 7
-  puts "Should have thrown Protocol::CheckFailed!"
 rescue Protocol::CheckError => e
   p e
+else
+  puts "Should have thrown Protocol::CheckFailed!"
 end

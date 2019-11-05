@@ -6,17 +6,22 @@ module Protocol
     # :none or :warning, and conformance of a class to a protocol should be
     # checked later in runtime.
     def conform_to?(protocol)
-      protocol.check(self, :none)
+      protocol.check(self)
     end
 
-    def conform_to!(protocol)
+    def conform_to(protocol)
       extend(protocol)
     end
 
     # Define a protocol configured by +block+. Look at the methods of
     # ProtocolModule to get an idea on how to do that.
-    def Protocol(&block)
-      ProtocolModule.new(&block)
+    def Protocol(modul = nil, &block)
+      pm = ProtocolModule.new(&block)
+      if modul
+        pm.infer(modul)
+      else
+        pm
+      end
     end
 
     alias protocol Protocol
@@ -35,7 +40,7 @@ module Protocol
     # :none or :warning, and conformance of a class to a protocol should be
     # checked later in runtime.
     def conform_to?(protocol)
-      protocol.check(self, :none)
+      protocol.check(self)
     end
   end
 end

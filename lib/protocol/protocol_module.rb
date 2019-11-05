@@ -3,13 +3,10 @@ module Protocol
   class ProtocolModule < Module
     # Creates an new ProtocolModule instance.
     def initialize(&block)
-      @descriptor = Descriptor.new(self)
-      @mode = :error
-      module_eval(&block)
+      @descriptor     = Descriptor.new(self)
+      @implementation = false
+      block and module_eval(&block)
     end
-
-    # The current check mode :none, :warning, or :error (the default).
-    attr_reader :mode
 
     # Returns all the protocol descriptions to check against as an Array.
     def descriptors
@@ -30,7 +27,6 @@ module Protocol
     # generic argument names.
     def to_ruby(result = '')
       result << "#{name} = Protocol do"
-      first = true
       if messages.empty?
         result << "\n"
       else
@@ -129,39 +125,38 @@ module Protocol
       "#<#{name}: #{messages.map { |m| m.shortcut } * ', '}>"
     end
 
-    # Check the conformity of +object+ recursively. This method returns either
-    # false OR true, if +mode+ is :none or :warning, or raises an
-    # CheckFailed, if +mode+ was :error.
-    def check(object, mode = @mode)
+    # Check the conformity of +object+ recursively and raise an exception if it
+    # doesn't.
+    def check!(object)
       checked = {}
-      result = true
       errors = CheckFailed.new
       each do |message|
         begin
           message.check(object, checked)
         rescue CheckError => e
-          case mode
-          when :error
-            errors << e
-          when :warning
-            warn e.to_s
-            result = false
-          when :none
-            result = false
-          end
+          errors << e
         end
       end
-      raise errors unless errors.empty?
-      result
+      errors.empty? or raise errors
+      true
     end
 
-    alias =~ check
+    alias =~ check!
+
+    # Check the conformity of +object+ recursively and return true iff it does.
+    def check(object)
+      check!(object)
+    rescue CheckFailed
+      false
+    else
+      true
+    end
 
     # Return all messages for whick a check failed.
     def check_failures(object)
-      check object
+      check!(object)
     rescue CheckFailed => e
-      return e.errors.map { |e| e.protocol_message }
+      e.errors.map { |e| e.protocol_message }
     end
 
     # This callback is called, when a module, that was extended with Protocol,
@@ -173,30 +168,17 @@ module Protocol
     # the Protocol
     # module.
     def included(modul)
-      super
-      if modul.is_a? Class and @mode == :error or @mode == :warning
-        $DEBUG and warn "#{name} is checking class #{modul}"
-        check modul
-      end
-    end
-
-    def extend_object(object)
       result = super
-      if @mode == :error or @mode == :warning
-        $DEBUG and warn "#{name} is checking class #{object}"
-        check object
+      if modul.is_a? Class
+        check! modul
       end
       result
     end
 
-    # Sets the check mode to +id+. +id+ should be one of :none, :warning, or
-    # :error. The mode to use while doing a conformity check is always the root
-    # module, that is, the modes of the included modules aren't important for
-    # the check.
-    def check_failure(mode)
-      CHECK_MODES.include?(mode) or
-        raise ArgumentError, "illegal check mode #{mode}"
-      @mode = mode
+    def extend_object(object)
+      result = super
+      check! object
+      result
     end
 
     # This method defines one of the messages, the protocol in question
@@ -226,12 +208,12 @@ module Protocol
     end
     private :parse_instance_method_signature
 
-    # Inherit a method signature from an instance method named +methodname+ of
+    # Infer a method signature from an instance method named +methodname+ of
     # +modul+. This means that this protocol should understand these instance
     # methods with their arity and block expectation. Note that automatic
     # detection of blocks does not work for Ruby methods defined in C. You can
     # set the +block_expected+ argument if you want to do this manually.
-    def inherit(modul, methodname, block_expected = nil)
+    def infer(modul, methodname = modul.public_instance_methods(false), block_expected = nil)
       Module === modul or
         raise TypeError, "expected Module not #{modul.class} as modul argument"
       methodnames = methodname.respond_to?(:to_ary) ?
@@ -254,7 +236,7 @@ module Protocol
     # Return true, if the ProtocolModule is currently in implementation mode.
     # Otherwise return false.
     def implementation?
-      !!@implementation
+      @implementation
     end
 
     # Switch to specification mode. Defined methods are added to the protocol

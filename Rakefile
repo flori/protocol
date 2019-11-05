@@ -17,7 +17,7 @@ for methods specified in a protocol.
 EOT
   licenses               << 'GPL-2'
   test_dir               'tests'
-  ignore                 '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '.rvmrc', '.AppleDouble'
+  ignore                 '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '.rvmrc', '.AppleDouble', '.byebug_history', 'tags', 'errors.lst'
   readme                 'README.rdoc'
   dependency             'ruby_parser', '~> 3.0'
   development_dependency 'simplecov'

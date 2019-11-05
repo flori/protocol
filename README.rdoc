@@ -217,22 +217,3 @@ shows how:
 Defining protocols and checking against conformance doesn't get in the way of
 Ruby's duck typing, but you can still use protocols to define, document, and
 check implementations that you expect from client code.
-
-==== Error modes in Protocols
-
-You can set different error modes for your protocols. By default the mode is
-set to :error, and a failed protocol conformance check raises a CheckError (a
-marker module) exception. Alternatively you can set the error mode to
-:warning with:
-
- Foo = Protocol do
-   check_failure :warning
- end
-
-during Protocol definition or later
-
-  Foo.check_failure :warning
-
-In :warning mode no execptions are raised, only a warning is printed to
-STDERR. If you set the error mode via Protocol::ProtocolModule#check_failure
-to :none, nothing will happen on conformance check failures.

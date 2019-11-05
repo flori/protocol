@@ -52,94 +52,95 @@ class ProtocolMethodParserTest < Test::Unit::TestCase
 
     def complex_end
       a = :end
-      foo { }
+      foo() { }
+      a
     end
 
     def complex
-      foo { }
+      foo() { }
     end
   end
 
   def test_args
     m = :empty; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ ], mp.args, "args failed for A##{m}"
-    assert_equal [ ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ ], mp.args, "args failed for A##{m}")
+    assert_equal([ ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :none; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ ], mp.args, "args failed for A##{m}"
-    assert_equal [ ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ ], mp.args, "args failed for A##{m}")
+    assert_equal([ ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_req; mp = MethodParser.new(A, m)
-    assert_equal 1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a ], mp.args, "args failed for A##{m}"
-    assert_equal [ :req ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a ], mp.args, "args failed for A##{m}")
+    assert_equal([ :req ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :two_req; mp = MethodParser.new(A, m)
-    assert_equal 2, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :req, :req ], mp.arg_kinds, "args failed for A##{m}"
-    assert_equal [ :a, :b ], mp.args, "args failed for A##{m}"
+    assert_equal(2, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :req, :req ], mp.arg_kinds, "args failed for A##{m}")
+    assert_equal([ :a, :b ], mp.args, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_req_one_opt; mp = MethodParser.new(A, m)
-    assert_equal -2, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :b ], mp.args, "args failed for A##{m}"
-    assert_equal [ :req, :opt ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-2, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :b ], mp.args, "args failed for A##{m}")
+    assert_equal([ :req, :opt ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_opt; mp = MethodParser.new(A, m)
-    assert_equal -1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a ], mp.args, "args failed for A##{m}"
-    assert_equal [ :opt ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a ], mp.args, "args failed for A##{m}")
+    assert_equal([ :opt ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :two_opt; mp = MethodParser.new(A, m)
-    assert_equal -1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :b ], mp.args, "args failed for A##{m}"
-    assert_equal [ :opt, :opt ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :b ], mp.args, "args failed for A##{m}")
+    assert_equal([ :opt, :opt ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_req_rest; mp = MethodParser.new(A, m)
-    assert_equal -2, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :'*b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :req, :rest ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-2, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :'*b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :req, :rest ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_opt_rest; mp = MethodParser.new(A, m)
-    assert_equal -1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :'*b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :opt, :rest ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :'*b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :opt, :rest ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :block; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :'&b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :block ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :'&b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :block ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_req_block; mp = MethodParser.new(A, m)
-    assert_equal 1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :'&b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :req, :block ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :'&b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :req, :block ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :one_opt_block; mp = MethodParser.new(A, m)
-    assert_equal -1, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :a, :'&b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :opt, :block ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(-1, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :a, :'&b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :opt, :block ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :yield_block; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :'&b' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :block ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :'&b' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :block ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :yield; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ :'&block' ], mp.args, "args failed for A##{m}"
-    assert_equal [ :block ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ :'&block' ], mp.args, "args failed for A##{m}")
+    assert_equal([ :block ], mp.arg_kinds, "args failed for A##{m}")
     assert !mp.complex?
     m = :complex_end; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ ], mp.args, "args failed for A##{m}"
-    assert_equal [ ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ ], mp.args, "args failed for A##{m}")
+    assert_equal([ ], mp.arg_kinds, "args failed for A##{m}")
     assert mp.complex?
     m = :complex; mp = MethodParser.new(A, m)
-    assert_equal 0, mp.arity, "arity failed for A##{m}"
-    assert_equal [ ], mp.args, "args failed for A##{m}"
-    assert_equal [ ], mp.arg_kinds, "args failed for A##{m}"
+    assert_equal(0, mp.arity, "arity failed for A##{m}")
+    assert_equal([ ], mp.args, "args failed for A##{m}")
+    assert_equal([ ], mp.arg_kinds, "args failed for A##{m}")
     assert mp.complex?
   end
 end

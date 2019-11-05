@@ -167,13 +167,6 @@ module Protocol
                 result = __send__('#{inner_name}', #{args} &block)
               end
               result
-            rescue Protocol::CheckError => e
-              case ObjectSpace._id2ref(#{__id__}).protocol.mode
-              when :error
-                raise e
-              when :warning
-                warn e
-              end
             ensure
               Thread.current[post_name].pop
               Thread.current[post_name].empty? and

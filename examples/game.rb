@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'protocol'
 
 # Small example of the template method pattern with Protocol. (I think, it was

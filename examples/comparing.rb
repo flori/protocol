@@ -1,3 +1,6 @@
+
+#!/usr/bin/env ruby
+
 require 'protocol/core'
 
 class Person
@@ -32,7 +35,8 @@ begin
 
     conform_to Comparing
   end
-  puts "Should have thrown Protocol::CheckFailed!"
 rescue Protocol::CheckFailed => e
   p e
+else
+  puts "Should have thrown Protocol::CheckFailed!"
 end
