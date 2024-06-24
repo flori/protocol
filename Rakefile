@@ -6,7 +6,7 @@ GemHadar do
     name                 'protocol'
     author               'Florian Frank'
     email                'flori@ping.de'
-    homepage             "http://flori.github.com/#{name}"
+    homepage             "https://github.com/flori/#{name}"
     summary              'Method Protocols for Ruby Classes'
     description <<EOT
 This library offers an implementation of protocols against which you can check
