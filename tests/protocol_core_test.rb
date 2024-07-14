@@ -9,7 +9,7 @@ class ProtocolCoreTest < Test::Unit::TestCase
   end
 
   def test_comparing_complex
-    assert_false Complex.conform_to?(Comparing)
+    assert_false BasicObject.conform_to?(Comparing)
   end
 
   def test_comparing_array
